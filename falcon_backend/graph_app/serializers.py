@@ -12,4 +12,4 @@ class NodeSerializer(serializers.ModelSerializer):
 class EdgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Edge
-        fields = ["source", "target", "weight"]
+        fields = ["pk", "source", "target", "weight"]
