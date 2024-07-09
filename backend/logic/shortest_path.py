@@ -1,10 +1,14 @@
 from queue import PriorityQueue
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from backend.tests.test_shortest_path import AdjListType
 
 
 def get_shortest_path_with_autonomy(
     departure: int,
     destiny: int,
-    adj_lists: dict[int, list[int]],
+    adj_lists: "AdjListType",
     initial_autonomy: int | None = None,
 ) -> tuple[dict[int, int] | None, list[int] | None]:
     """
@@ -13,6 +17,14 @@ def get_shortest_path_with_autonomy(
     and the autonomy that reflects that the vehicle can travel
     without refueling autonomy units of distance without refueling
     """
+    if departure not in adj_lists or destiny not in adj_lists:
+        raise ValueError("Departure or destiny does not exists")
+
+    if initial_autonomy < 0:
+        raise ValueError("Initial autonomy must be greater or equal to zero")
+
+    if initial_autonomy is None:
+        initial_autonomy = float("inf")
     pq = PriorityQueue()
     # [distance from departure, node, autonomy]
     pq.put((0, departure, initial_autonomy))
