@@ -1,8 +1,9 @@
 from queue import PriorityQueue
 from typing import TYPE_CHECKING
 
+
 if TYPE_CHECKING:
-    from falcon_backend.tests.test_shortest_path import AdjListType
+    from tests.test_shortest_path import AdjListType
 
 
 def get_shortest_path_with_autonomy(
@@ -20,11 +21,13 @@ def get_shortest_path_with_autonomy(
     if source not in adj_lists or target not in adj_lists:
         raise ValueError("Source or destination does not exists in edges")
 
+    # first check for none to avoid comparing a none with a number
+    if initial_autonomy is None:
+        initial_autonomy = float("inf")
+
     if initial_autonomy < 0:
         raise ValueError("Initial autonomy must be greater or equal to zero")
 
-    if initial_autonomy is None:
-        initial_autonomy = float("inf")
     pq = PriorityQueue()
     # [distance from departure, node, autonomy]
     pq.put((0, source, initial_autonomy))
