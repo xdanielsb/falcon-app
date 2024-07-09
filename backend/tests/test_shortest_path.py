@@ -25,6 +25,18 @@ def setup_galaxy():
     return planets, adj_list
 
 
+def test_path_departure_equals_destiny(setup_galaxy):
+    planets, adj_list = setup_galaxy
+
+    dis_dict, path = get_shortest_path_with_autonomy(
+        planets["planet1"], planets["planet1"], adj_list, 4
+    )
+
+    assert path == [planets["planet1"]]
+    # path from the same node to the same node must be zero
+    assert dis_dict == {planets["planet1"]: 0}
+
+
 def test_simple_graph(setup_galaxy):
     planets, adj_list = setup_galaxy
     expected_dis = {
