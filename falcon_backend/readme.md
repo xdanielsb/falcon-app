@@ -8,6 +8,12 @@
   $ pip3 install -r requirements-dev.txt --no-cache-dir
 ```
 
+### run
+```sh
+$ python manage.py runserver
+```
+
+
 ### Running tests
 ```sh
 $ pytest

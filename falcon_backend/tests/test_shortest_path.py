@@ -1,6 +1,6 @@
 import pytest
 
-from backend.logic.shortest_path import get_shortest_path_with_autonomy
+from falcon_backend.logic.shortest_path import get_shortest_path_with_autonomy
 
 from typing import Tuple, Dict, List
 

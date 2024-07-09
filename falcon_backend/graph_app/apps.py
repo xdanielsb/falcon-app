@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class GraphConfig(AppConfig):
+class GraphAppConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "graph"
+    name = "graph_app"

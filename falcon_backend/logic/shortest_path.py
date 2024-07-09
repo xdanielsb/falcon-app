@@ -2,7 +2,7 @@ from queue import PriorityQueue
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from backend.tests.test_shortest_path import AdjListType
+    from falcon_backend.tests.test_shortest_path import AdjListType
 
 
 def get_shortest_path_with_autonomy(
