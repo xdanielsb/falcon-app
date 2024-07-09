@@ -6,7 +6,7 @@ def get_shortest_path_with_autonomy(
     destiny: int,
     adj_lists: dict[int, list[int]],
     initial_autonomy: int | None = None,
-):
+) -> tuple[dict[int, int] | None, list[int] | None]:
     """
     Compute the shortest path from departure to destiny
     it receives a dictionary with the adjacency lists of the graph
@@ -19,7 +19,7 @@ def get_shortest_path_with_autonomy(
     # nodes already visited
     visited = set()
     # distance from departure to each node
-    dis = {departure: 0}
+    distance_dict = {departure: 0}
     # parent of each node, helps to rebuild the path
     parent = {}
     # whether the paint is reach
@@ -37,14 +37,17 @@ def get_shortest_path_with_autonomy(
             break
 
         if node in adj_lists:
-            for neighbor, weight in adj_lists[node]:
-                if neighbor not in dis or dis[neighbor] > d + weight:
-                    dis[neighbor] = d + weight
-                    parent[neighbor] = node
-                    pq.put((dis[neighbor], neighbor, autonomy - weight))
+            for connection, weight in adj_lists[node]:
+                if (
+                    connection not in distance_dict
+                    or distance_dict[connection] > d + weight
+                ):
+                    distance_dict[connection] = d + weight
+                    parent[connection] = node
+                    pq.put((distance_dict[connection], connection, autonomy - weight))
 
     if not path_found:
-        return {}, [], 0
+        return None, None
 
     # rebuild the path
     path = [destiny]
@@ -54,5 +57,5 @@ def get_shortest_path_with_autonomy(
         path.append(curr)
 
     # only return the dis of nodes in path
-    dis = {key: value for key, value in dis.items() if key in path}
-    return dis, path
+    distance_dict = {key: value for key, value in distance_dict.items() if key in path}
+    return distance_dict, path

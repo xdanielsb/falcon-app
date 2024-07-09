@@ -2,3 +2,5 @@
 .pyc
 .swp
 .sw
+
+__pycache__/

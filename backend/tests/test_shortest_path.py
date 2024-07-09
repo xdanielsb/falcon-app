@@ -14,6 +14,7 @@ def setup_galaxy():
     }
 
     adj_list = {
+        # {planetid_departure: [(planetid_destiny, weight)]}
         1: [(2, 1), (3, 2)],
         2: [(4, 3)],
         3: [(4, 4)],
@@ -39,3 +40,14 @@ def test_simple_graph(setup_galaxy):
 
     assert expected_dis == actual_dis
     assert expected_path == path
+
+
+def test_no_possible_to_reach_destiny_no_path(setup_galaxy):
+    planets, adj_list = setup_galaxy
+    planets["planet6"] = 6
+    adj_list[6] = []
+    actual_dis, path = get_shortest_path_with_autonomy(
+        planets["planet5"], planets["planet6"], adj_list, 4
+    )
+    assert actual_dis is None
+    assert path is None
