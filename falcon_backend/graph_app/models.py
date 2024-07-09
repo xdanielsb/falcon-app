@@ -15,10 +15,10 @@ class Edge(models.Model):
     source = models.ForeignKey(
         Node, on_delete=models.CASCADE, related_name="source_node"
     )
-    destination = models.ForeignKey(
-        Node, on_delete=models.CASCADE, related_name="destination_node"
+    target = models.ForeignKey(
+        Node, on_delete=models.CASCADE, related_name="target_node"
     )
     weight = models.IntegerField()
 
     def __str__(self):
-        return f"{self.source.name} -> {self.destination.name} : {self.weight}"
+        return f"{self.source.name} -> {self.target.name} : {self.weight}"

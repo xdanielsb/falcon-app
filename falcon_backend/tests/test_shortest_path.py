@@ -73,7 +73,7 @@ def test_no_possible_to_reach_destiny_no_path(setup_galaxy):
 
 def test_planet_does_not_exist(setup_galaxy):
     planets, adj_list = setup_galaxy
-    with pytest.raises(ValueError, match="Departure or destiny does not exists"):
+    with pytest.raises(ValueError, match="Source or destination does not exists in edges"):
         get_shortest_path_with_autonomy(-1, planets["planet5"], adj_list, 4)
 
 

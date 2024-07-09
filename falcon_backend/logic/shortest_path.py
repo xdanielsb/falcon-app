@@ -6,8 +6,8 @@ if TYPE_CHECKING:
 
 
 def get_shortest_path_with_autonomy(
-    departure: int,
-    destiny: int,
+    source: int,
+    target: int,
     adj_lists: "AdjListType",
     initial_autonomy: int | None = None,
 ) -> tuple[dict[int, int] | None, list[int] | None]:
@@ -17,8 +17,8 @@ def get_shortest_path_with_autonomy(
     and the autonomy that reflects that the vehicle can travel
     without refueling autonomy units of distance without refueling
     """
-    if departure not in adj_lists or destiny not in adj_lists:
-        raise ValueError("Departure or destiny does not exists")
+    if source not in adj_lists or target not in adj_lists:
+        raise ValueError("Source or destination does not exists in edges")
 
     if initial_autonomy < 0:
         raise ValueError("Initial autonomy must be greater or equal to zero")
@@ -27,11 +27,11 @@ def get_shortest_path_with_autonomy(
         initial_autonomy = float("inf")
     pq = PriorityQueue()
     # [distance from departure, node, autonomy]
-    pq.put((0, departure, initial_autonomy))
+    pq.put((0, source, initial_autonomy))
     # nodes already visited
     visited = set()
     # distance from departure to each node
-    distance_dict = {departure: 0}
+    distance_dict = {source: 0}
     # parent of each node, helps to rebuild the path
     parent = {}
     # whether the paint is reach
@@ -44,7 +44,7 @@ def get_shortest_path_with_autonomy(
             continue
         visited.add(node)
 
-        if node == destiny:
+        if node == target:
             path_found = True
             break
 
@@ -62,9 +62,9 @@ def get_shortest_path_with_autonomy(
         return None, None
 
     # rebuild the path
-    path = [destiny]
-    curr = destiny
-    while curr != departure:
+    path = [target]
+    curr = target
+    while curr != source:
         curr = parent[curr]
         path.append(curr)
 
