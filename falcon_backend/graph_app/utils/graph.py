@@ -18,5 +18,5 @@ def graph_to_adj_list(edges: list[Edge]) -> "AdjListType":
             adj_lists[edge.target.pk] = []
         adj_lists[edge.source.pk].append((edge.target.pk, edge.weight))
         # can go in both directions
-        adj_lists[edge.source.pk].append((edge.source.pk, edge.weight))
+        adj_lists[edge.target.pk].append((edge.source.pk, edge.weight))
     return adj_lists

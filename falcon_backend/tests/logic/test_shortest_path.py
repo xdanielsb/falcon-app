@@ -17,10 +17,10 @@ def setup_galaxy() -> GraphDescType:
     adj_list = {
         # {planetid_departure: [(planetid_destiny, distance_from_departure_to_destiny)]}
         1: [(2, 1), (3, 2)],
-        2: [(4, 3)],
-        3: [(4, 4)],
-        4: [(5, 4)],
-        5: [],
+        2: [(4, 3), (1, 1)],
+        3: [(4, 4), (1, 3)],
+        4: [(5, 4), (2, 3), (3, 4)],
+        5: [(4, 3)],
     }
 
     return planets, adj_list
@@ -82,3 +82,18 @@ def test_initial_autonomy_negative(setup_galaxy):
         get_shortest_path_with_autonomy(
             planets["planet1"], planets["planet5"], adj_list, -1
         )
+
+
+def test_path_in_both_directions_should_result_in_the_same_weight(
+    setup_galaxy: GraphDescType,
+) -> None:
+    planets, adj_list = setup_galaxy
+    actual_dis_one, path_one = get_shortest_path_with_autonomy(
+        planets["planet1"], planets["planet4"], adj_list, 4
+    )
+    actual_dis_two, path_two = get_shortest_path_with_autonomy(
+        planets["planet4"], planets["planet1"], adj_list, 4
+    )
+
+    assert  actual_dis_one[planets["planet4"]] == actual_dis_two[planets["planet1"]]
+    assert sorted(path_one) == sorted(path_two)
