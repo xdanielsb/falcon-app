@@ -35,6 +35,7 @@ export class GraphFormComponent {
 
   @Output() computeOddsEvent = new EventEmitter<GraphMetadataForm>();
   @Input({ required: true }) graph!: Graph;
+  @Input({ required: true }) odds!: number | null;
   constructor(private fb: FormBuilder) {}
 
   computeOdds(): void {

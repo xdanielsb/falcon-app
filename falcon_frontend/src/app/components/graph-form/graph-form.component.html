@@ -36,3 +36,9 @@
     {{ 'GRAPH_MANAGEMENT.COMPUTE_ODDS' | translate }}
   </button>
 </div>
+
+@if (odds !== null) {
+  <div class="odds">
+    {{ 'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate: { odds: odds } }}
+  </div>
+}

@@ -7,16 +7,10 @@
       <div class="content">
         <app-graph-form
           [graph]="graph"
+          [odds]="odds"
           (computeOddsEvent)="computeOdds($event)"
         />
         <app-graph-preview [graph]="graph" />
-      </div>
-    }
-    @if (odds !== null) {
-      <div>
-        {{
-          'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate: { odds: odds }
-        }}
       </div>
     }
   </mat-drawer-content>
