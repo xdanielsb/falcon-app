@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { GraphResponse, parseGraph } from '../models/graph';
+import { GraphMetadataForm, GraphResponse, parseGraph } from '../models/graph';
 import { ShortestPath } from '../models/shortest-path';
 import { ApiUrls } from '../api.urls';
 
@@ -17,10 +17,10 @@ export class GraphService {
       .pipe(map((response) => parseGraph(response)));
   }
 
-  computeOdds(startPk: number, endPk: number) {
+  computeOdds(input: GraphMetadataForm) {
     return this.http.post<ShortestPath>(ApiUrls.ShortestPathUrl, {
-      startPk,
-      endPk,
+      ...input,
+      autonomy: Number.parseInt(<string>input.autonomy || '0'),
     });
   }
 }

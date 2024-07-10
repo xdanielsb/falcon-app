@@ -3,6 +3,13 @@
     <app-graph-settings />
   </mat-drawer>
   <mat-drawer-content>
-    <app-graph-form />
+    <app-graph-form [graph]="graph" (computeOddsEvent)="computeOdds($event)" />
+    @if (odds !== null) {
+      <div>
+        {{
+          'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate: { odds: odds }
+        }}
+      </div>
+    }
   </mat-drawer-content>
 </mat-drawer-container>

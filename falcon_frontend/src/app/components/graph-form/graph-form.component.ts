@@ -1,15 +1,10 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { AppForm } from '../../utils/form';
 import { GraphMetadataForm } from '../../models/graph';
@@ -33,16 +28,18 @@ import { GraphMetadataForm } from '../../models/graph';
 })
 export class GraphFormComponent {
   form: AppForm<GraphMetadataForm> = this.fb.group({
-    departure: [null, Validators.required],
-    destination: [null, Validators.required],
-    autonomy: [5, Validators.min(1)],
+    sourceId: [null, Validators.required],
+    targetId: [null, Validators.required],
+    autonomy: [5, Validators.min(0)],
   }) as AppForm<GraphMetadataForm>;
 
-  // todo: replace by input create a service to get the nodes
-  nodes = [{ id: 1, label: 'hello' }];
+  @Output() computeOddsEvent = new EventEmitter<GraphMetadataForm>();
+  @Input() graph!: any;
   constructor(private fb: FormBuilder) {}
 
   computeOdds(): void {
-    // tode: implement service to get the odds
+    if (this.form.value) {
+      this.computeOddsEvent.emit(this.form.value as GraphMetadataForm);
+    }
   }
 }

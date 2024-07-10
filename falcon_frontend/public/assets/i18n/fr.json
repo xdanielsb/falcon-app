@@ -2,6 +2,7 @@
   "GRAPH_MANAGEMENT.TITLE": "Graph Management",
   "GRAPH_MANAGEMENT.DEPARTURE": "Departure",
   "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Select a route",
+  "GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE": "Odds to arrive: {{odds}}",
   "GRAPH_MANAGEMENT.DESTINATION": "Destination",
   "GRAPH_MANAGEMENT.AUTONOMY": "Autonomy",
   "GRAPH_MANAGEMENT.COMPUTE_ODDS": "Compute odds"

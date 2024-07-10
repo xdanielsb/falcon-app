@@ -11,7 +11,7 @@ def compute_probability_arrival(
 
     (distance_dict, path) = path_info
 
-    if path is None:
+    if path is None or distance_dict is None:
         return 0
 
     if distance_dict[target_id] >= empire.countdown:

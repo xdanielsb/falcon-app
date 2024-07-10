@@ -3,8 +3,8 @@
   <form *ngIf="form" [formGroup]="form">
     <mat-form-field>
       <mat-label>{{ 'GRAPH_MANAGEMENT.DEPARTURE' | translate }}</mat-label>
-      <mat-select formControlName="departure">
-        @for (node of nodes || []; track node) {
+      <mat-select formControlName="sourceId">
+        @for (node of graph.nodes || []; track node) {
           <mat-option [value]="node.id">{{ node.label }}</mat-option>
         }
       </mat-select>
@@ -12,8 +12,8 @@
 
     <mat-form-field>
       <mat-label>{{ 'GRAPH_MANAGEMENT.DESTINATION' | translate }}</mat-label>
-      <mat-select formControlName="destination">
-        @for (node of nodes || []; track node) {
+      <mat-select formControlName="targetId">
+        @for (node of graph.nodes || []; track node) {
           <mat-option [value]="node.id">{{ node.label }}</mat-option>
         }
       </mat-select>
@@ -31,7 +31,7 @@
     mat-raised-button
     color="primary"
     (click)="computeOdds()"
-    [disabled]="form?.invalid"
+    [disabled]="form.invalid"
   >
     {{ 'GRAPH_MANAGEMENT.COMPUTE_ODDS' | translate }}
   </button>

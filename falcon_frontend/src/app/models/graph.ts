@@ -2,8 +2,8 @@ import { EdgeResponse, parseEdgeResponse } from './edge';
 import { NodeResponse, parseResponseNode } from './node';
 
 export interface GraphMetadataForm {
-  departure: string | number | null;
-  destination: string | number | null;
+  sourceId: string | number | null;
+  targetId: string | number | null;
   autonomy: string | number | null;
 }
 
