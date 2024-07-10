@@ -5,7 +5,7 @@
       <mat-label>{{ 'GRAPH_MANAGEMENT.DEPARTURE' | translate }}</mat-label>
       <mat-select formControlName="sourceId">
         @for (node of graph.nodes || []; track node) {
-          <mat-option [value]="node.id">{{ node.label }}</mat-option>
+          <mat-option [value]="node.id + ''">{{ node.label }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

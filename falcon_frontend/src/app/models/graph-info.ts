@@ -5,4 +5,7 @@ export interface GraphInfo {
   numberOfEdges: number;
   countDown: number;
   hunters: Hunter[];
+  sourceId: number;
+  targetId: number;
+  autonomy: number;
 }

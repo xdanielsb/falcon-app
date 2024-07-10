@@ -7,7 +7,7 @@
   "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Select a route",
   "GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE": "Odds to arrive: {{odds}}",
   "GRAPH_MANAGEMENT.NUMBER_OF_NODES": "Number of nodes",
-  "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Number of nodes",
+  "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Number of edges",
   "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Number of hunters",
   "GRAPH_MANAGEMENT.COUNTDOWN": "Countdown",
   "GRAPH_MANAGEMENT.INFO": "Graph information"

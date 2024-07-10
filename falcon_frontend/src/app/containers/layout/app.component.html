@@ -6,12 +6,13 @@
     @if (graph !== null) {
       <div class="content">
         <div>
+          <app-graph-info [graphInfo]="graphInfo" />
           <app-graph-form
             [graph]="graph"
+            [graphInfo]="graphInfo"
             [odds]="odds"
             (computeOddsEvent)="computeOdds($event)"
           />
-          <app-graph-info [graphInfo]="graphInfo" />
         </div>
         <app-graph-preview [graph]="graph" />
       </div>
