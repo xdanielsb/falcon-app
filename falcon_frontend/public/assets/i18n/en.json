@@ -1,3 +1,8 @@
 {
-  "GRAPH_MANAGEMENT.TITLE": "Gestion du graphe"
+  "GRAPH_MANAGEMENT.TITLE": "Gestion du graphe",
+  "GRAPH_MANAGEMENT.DEPARTURE": "Departure",
+  "GRAPH_MANAGEMENT.DESTINATION": "Destination",
+  "GRAPH_MANAGEMENT.AUTONOMY": "Autonomy",
+  "GRAPH_MANAGEMENT.COMPUTE_ODDS": "Compute odds",
+  "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Select a route"
 }

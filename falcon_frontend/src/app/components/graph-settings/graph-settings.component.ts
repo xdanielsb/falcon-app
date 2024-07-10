@@ -7,6 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './graph-settings.component.html',
-  styleUrl: './graph-settings.component.css',
+  styleUrl: './graph-settings.component.scss',
 })
 export class GraphSettingsComponent {}

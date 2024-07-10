@@ -1,1 +1,38 @@
-<p>graph-form works!</p>
+<section class="select-route">
+  <h3>{{ 'GRAPH_MANAGEMENT.SELECT_A_ROUTE' | translate }}</h3>
+  <form *ngIf="form" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>{{ 'GRAPH_MANAGEMENT.DEPARTURE' | translate }}</mat-label>
+      <mat-select formControlName="departure">
+        @for (node of nodes || []; track node) {
+          <mat-option [value]="node.id">{{ node.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'GRAPH_MANAGEMENT.DESTINATION' | translate }}</mat-label>
+      <mat-select formControlName="destination">
+        @for (node of nodes || []; track node) {
+          <mat-option [value]="node.id">{{ node.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'GRAPH_MANAGEMENT.AUTONOMY' | translate }}</mat-label>
+      <input matInput formControlName="autonomy" />
+    </mat-form-field>
+  </form>
+</section>
+
+<div class="actions">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="computeOdds()"
+    [disabled]="form?.invalid"
+  >
+    {{ 'GRAPH_MANAGEMENT.COMPUTE_ODDS' | translate }}
+  </button>
+</div>
