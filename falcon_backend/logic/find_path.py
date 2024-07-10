@@ -1,5 +1,6 @@
 from queue import PriorityQueue
 from typing import TYPE_CHECKING
+from falcon_backend.logger import get_logger
 
 
 if TYPE_CHECKING:
@@ -24,13 +25,16 @@ def get_find_path_with_autonomy(
 
     """
     if source not in adj_lists or target not in adj_lists:
+        get_logger().error("Source or destination does not exists in edges")
         raise ValueError("Source or destination does not exists in edges")
 
     # first check for none to avoid comparing a none with a number
     if initial_autonomy is None:
+        get_logger().info("Initial autonomy is not provided, setting it to infinity")
         initial_autonomy = float("inf")
 
     if initial_autonomy < 0:
+        get_logger().error("Initial autonomy must be greater or equal to zero")
         raise ValueError("Initial autonomy must be greater or equal to zero")
 
     pq = PriorityQueue()

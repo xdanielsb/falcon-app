@@ -2,7 +2,6 @@ import pytest
 
 from graph_app.types.graph_desc import GraphDescType
 from logic.best_path_heuristic import find_best_path_heuristic
-from logic.find_path import get_find_path_with_autonomy
 
 
 @pytest.fixture
@@ -58,5 +57,3 @@ def test_simple_graph(setup_galaxy: GraphDescType) -> None:
 
     assert expected_dis == actual_dis
     assert expected_path == path
-
-

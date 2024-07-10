@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from falcon_backend.logger import CustomisedJSONFormatter
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "falcon_backend.middleware.LoggingMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -128,3 +131,41 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "json",  # Use the JSON formatter
+        },
+        "stdout": {
+            "class": "logging.StreamHandler",
+            "formatter": "json",  # Use the JSON formatter
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "formatters": {
+        "simple": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "console": {
+            "format": "{levelname} {asctime} {pathname} - line {lineno}: {message}",
+            "style": "{",
+        },
+        "json": {
+            "()": CustomisedJSONFormatter,
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "stdout"],
+            "level": "INFO",
+        },
+    },
+}

@@ -1,3 +1,4 @@
+from falcon_backend.logger import get_logger
 from graph_app.types.empire import BountyHunterWithPlanetId
 from graph_app.types.graph_desc import FindPathReturnType
 
@@ -16,9 +17,12 @@ def compute_probability_arrival(
     (distance_dict, path) = path_info
 
     if path is None or distance_dict is None:
+        # sanity check
+        get_logger().info("Path or distance dict is None probability is zero")
         return 0.0
 
     if distance_dict[target_id] > countdown:
+        get_logger().info("Distance is greater than countdown probability is zero")
         return 0.0
 
     ans = 1.0

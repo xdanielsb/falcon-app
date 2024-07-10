@@ -4,6 +4,7 @@ from contextlib import closing
 
 from dotenv import dotenv_values
 
+from falcon_backend.logger import get_logger
 from graph_app.models import Node, Edge, GraphMetadata, Empire, BountyHunter
 from graph_app.types.empire import EmpireSchema
 from graph_app.types.path import PathInfo, PathInfoSchema
@@ -34,6 +35,7 @@ def load_nodes_and_edges(metadata_path: str) -> None:
     # todo: if absolute and write tests
 
     if not os.path.exists(db_path):
+        get_logger().error(f"Database file not found: {db_path}")
         raise FileNotFoundError(f"Database file not found: {db_path}")
 
     # Clear existing data
@@ -51,6 +53,8 @@ def load_nodes_and_edges(metadata_path: str) -> None:
             target = get_or_create_node(destination_str)
             Edge.objects.create(source=origin, target=target, weight=travel_time)
 
+    get_logger().info("Nodes and edges loaded")
+
 
 def load_graph_metadata(metadata_path: str) -> None:
     metadata = load_metadata(metadata_path)
@@ -61,6 +65,7 @@ def load_graph_metadata(metadata_path: str) -> None:
     GraphMetadata.objects.create(
         source=source, target=target, autonomy=metadata.autonomy
     )
+    get_logger().info("Graph metadata loaded")
 
 
 def load_initial_db() -> None:
@@ -70,10 +75,12 @@ def load_initial_db() -> None:
     config = dotenv_values(".env")
     path_configuration = config["MILLENNIUM_FALCON_PATH"]
     if not path_configuration:
+        get_logger().error("MILLENNIUM_FALCON_PATH not found in .env")
         raise ValueError("MILLENNIUM_FALCON_PATH not found in .env")
 
     absolute_path = make_absolute_path(path_configuration)
     if not os.path.exists(absolute_path):
+        get_logger().error(f"Configuration file not found: {absolute_path}")
         raise FileNotFoundError(f"Configuration file not found: {absolute_path}")
 
     load_nodes_and_edges(path_configuration)
@@ -87,10 +94,12 @@ def load_empire_info() -> None:
     config = dotenv_values(".env")
     path_configuration = config["EMPIRE_PATH"]
     if not path_configuration:
+        get_logger().error("EMPIRE_PATH not found in .env")
         raise ValueError("EMPIRE_PATH not found in .env")
 
     absolute_path = make_absolute_path(path_configuration)
     if not os.path.exists(absolute_path):
+        get_logger().error(f"Configuration file not found: {absolute_path}")
         raise FileNotFoundError(f"Configuration file not found: {absolute_path}")
     # verify schema
     data = read_json_file(absolute_path)
@@ -107,3 +116,5 @@ def load_empire_info() -> None:
             planet=bh_data.planet, day=bh_data.day
         )
         empire.bounty_hunters.add(bounty_hunter)
+
+    get_logger().info("Empire info loaded")

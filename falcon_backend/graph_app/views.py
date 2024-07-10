@@ -4,13 +4,13 @@ from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from falcon_backend.logger import get_logger
 from graph_app.models import Node, Edge, Empire, GraphMetadata, BountyHunter
 from graph_app.serializers import NodeSerializer, EdgeSerializer, BountyHunterSerializer
 from graph_app.types.empire import BountyHunterWithPlanetId
 from graph_app.utils.graph import graph_to_adj_list
 from logic.best_path_heuristic import find_best_path_heuristic
 from logic.probability_arriving import compute_probability_arrival
-from logic.find_path import get_find_path_with_autonomy
 
 
 @api_view(["GET"])
@@ -53,6 +53,7 @@ class FindPathView(views.APIView):
             bounty_hunters_with_node_ids,
             stops,
         )
+        get_logger().info(f"Probability computed: {probability_arriving}")
         return JsonResponse(
             {"distances": dis, "path": path, "probability": probability_arriving}
         )

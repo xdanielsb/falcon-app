@@ -1,6 +1,7 @@
 import random
 from typing import TYPE_CHECKING
 
+from falcon_backend.logger import get_logger
 from logic.find_path import get_find_path_with_autonomy
 
 if TYPE_CHECKING:
@@ -21,6 +22,9 @@ def modify_one_edge_to_infinity(adj_lists: "AdjListType", best_current_path: lis
             modified_adj_lists[best_current_path[random_index]][count] = (
                 node,
                 float("inf"),
+            )
+            get_logger().info(
+                f"Modified edge to infinity {best_current_path[random_index]} -> {node} = inf"
             )
             break
         else:
@@ -47,7 +51,7 @@ def find_best_path_heuristic(
     best_stops = []
     best_total_distance_dict = {}
 
-    for _ in range(iterations):
+    for i in range(iterations):
         modified_adj_lists = (
             modify_one_edge_to_infinity(adj_lists, best_path)
             if best_path is not None
@@ -63,5 +67,8 @@ def find_best_path_heuristic(
                 best_path = path
                 best_stops = stops
                 best_total_distance_dict = distance_dict
+        get_logger().info(
+            f"Best path found so far: {best_path}, with distance: {best_distance}, iteration {i} / {iterations}"
+        )
 
     return best_total_distance_dict, best_path, best_stops
