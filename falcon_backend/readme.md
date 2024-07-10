@@ -1,5 +1,13 @@
 ## Falcon backend
 
+### Run
+```sh
+ $ docker build --no-cache -t falcon-backend .
+ $ docker run -p 8000:8000 falcon-backend
+```
+
+Once this is done you can go to http://localhost:8000/graph/ and see the api :).
+
 ## Setup for development
 
 ### Initial configuration
@@ -11,22 +19,21 @@ The initial configuration is in the .env file
 ### Create a virtualenv
 ```sh
   $ pyenv virtualenv 3.12 falcon-env 
+  $ pyenv activate falcon-env
   $ pip3 install -r requirements-dev.txt --no-cache-dir
   $ # load the initial configuration (read the .env file and create the data on the db)
   $ python manage.py runscript init_db
 ```
 
-### run
+#### run
 ```sh
 $ python manage.py runserver
 ```
 
-### Running tests
+#### Running tests
 ```sh
-# for module logic
+# unit tests 
 $ pytest
-# for the api graph app
+# api tests
 $ python manage.py test graph_app.tests
 ```
-
-Inside the app `graph_app` also there are some tests for each end point.
