@@ -13,7 +13,7 @@ Once this is done you can go to http://localhost:8000/graph/ and see the api :).
 ### Initial configuration
 The initial configuration is in the .env file
 ```sh
-    MILLENNIUM_FALCON_PATH_INITIAL_CONFIGURATION=./tests/cases/case1/millennium-falcon.json
+    MILLENNIUM_FALCON_PATH=./tests/cases/case1/millennium-falcon.json
 ```
 
 ### Create a virtualenv

@@ -4,7 +4,8 @@ from contextlib import closing
 
 from dotenv import dotenv_values
 
-from graph_app.models import Node, Edge, GraphMetadata
+from graph_app.models import Node, Edge, GraphMetadata, Empire, BountyHunter
+from graph_app.types.empire import EmpireSchema
 from graph_app.types.path import PathInfo, PathInfoSchema
 from graph_app.utils.file import read_json_file, make_absolute_path
 
@@ -67,11 +68,9 @@ def load_initial_db() -> None:
     load the initial database configuration given the path of a file store in the value of an .env variable
     """
     config = dotenv_values(".env")
-    path_configuration = config["MILLENNIUM_FALCON_PATH_INITIAL_CONFIGURATION"]
+    path_configuration = config["MILLENNIUM_FALCON_PATH"]
     if not path_configuration:
-        raise ValueError(
-            "MILLENNIUM_FALCON_PATH_INITIAL_CONFIGURATION not found in .env"
-        )
+        raise ValueError("MILLENNIUM_FALCON_PATH not found in .env")
 
     absolute_path = make_absolute_path(path_configuration)
     if not os.path.exists(absolute_path):
@@ -79,3 +78,32 @@ def load_initial_db() -> None:
 
     load_nodes_and_edges(path_configuration)
     load_graph_metadata(path_configuration)
+
+
+def load_empire_info() -> None:
+    """
+    load the empire information
+    """
+    config = dotenv_values(".env")
+    path_configuration = config["EMPIRE_PATH"]
+    if not path_configuration:
+        raise ValueError("EMPIRE_PATH not found in .env")
+
+    absolute_path = make_absolute_path(path_configuration)
+    if not os.path.exists(absolute_path):
+        raise FileNotFoundError(f"Configuration file not found: {absolute_path}")
+    # verify schema
+    data = read_json_file(absolute_path)
+    schema = EmpireSchema()
+    empire_info = schema.load(data)
+    # cleaning
+    BountyHunter.objects.all().delete()
+    Empire.objects.all().delete()
+    # loading in the database
+    empire = Empire.objects.create(countdown=empire_info.countdown)
+
+    for bh_data in empire_info.bounty_hunters:
+        bounty_hunter = BountyHunter.objects.create(
+            planet=bh_data.planet, day=bh_data.day
+        )
+        empire.bounty_hunters.add(bounty_hunter)

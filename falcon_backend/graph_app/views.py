@@ -4,9 +4,10 @@ from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from graph_app.models import Node, Edge
+from graph_app.models import Node, Edge, Empire
 from graph_app.serializers import NodeSerializer, EdgeSerializer
 from graph_app.utils.graph import graph_to_adj_list
+from logic.probability_arriving import compute_probability_arrival
 from logic.shortest_path import get_shortest_path_with_autonomy
 
 
@@ -33,4 +34,10 @@ class ShortestPathView(views.APIView):
         dis, path = get_shortest_path_with_autonomy(
             source.pk, target.pk, graph_to_adj_list(Edge.objects.all()), autonomy
         )
-        return JsonResponse({"distances": dis, "path": path})
+        empire = Empire.objects.first()
+        probability_arriving = compute_probability_arrival(
+            target.pk, (dis, autonomy), empire
+        )
+        return JsonResponse(
+            {"distances": dis, "path": path, "probability": probability_arriving}
+        )

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from graph_app.types.graph_desc import AdjListType
+    from graph_app.types.graph_desc import ShortestPathReturnType, AdjListType
 
 
 def get_shortest_path_with_autonomy(
@@ -11,12 +11,17 @@ def get_shortest_path_with_autonomy(
     target: int,
     adj_lists: "AdjListType",
     initial_autonomy: int | None = None,
-) -> tuple[dict[int, int] | None, list[int] | None]:
+) -> "ShortestPathReturnType":
     """
     Compute the shortest path from departure to destiny
+
     it receives a dictionary with the adjacency lists of the graph
     and the autonomy that reflects that the vehicle can travel
     without refueling autonomy units of distance without refueling
+
+    it returns a tuple with the distance from the departure to each node
+    the path from the source to the target node
+
     """
     if source not in adj_lists or target not in adj_lists:
         raise ValueError("Source or destination does not exists in edges")

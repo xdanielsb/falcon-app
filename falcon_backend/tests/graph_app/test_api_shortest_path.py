@@ -3,7 +3,7 @@ from django.urls import path, reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
 
-from graph_app.models import Edge, Node
+from graph_app.models import Edge, Node, BountyHunter, Empire
 from graph_app.views import ShortestPathView
 
 
@@ -21,6 +21,10 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         Edge.objects.create(source=self.node2, target=self.node3, weight=4)
         Edge.objects.create(source=self.node3, target=self.node1, weight=2)
 
+        empire = Empire.objects.create(countdown=10)
+        bounty_hunter = BountyHunter.objects.create(day=1, planet="Marz")
+        empire.bounty_hunters.add(bounty_hunter)
+
     @override_settings(DEBUG=True)
     def test_shortest_path_valid_with_autonomy(self):
         data = {"sourceId": self.node1.pk, "targetId": self.node3.pk, "autonomy": 10}
@@ -29,6 +33,7 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("distances", response.json())
         self.assertIn("path", response.json())
+        self.assertIn("probability", response.json())
 
     @override_settings(DEBUG=True)
     def test_shortest_path_valid_without_autonomy(self):
@@ -41,6 +46,7 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("distances", response.json())
         self.assertIn("path", response.json())
+        self.assertIn("probability", response.json())
 
     @override_settings(DEBUG=True)
     def test_shortest_path_missing_node(self):

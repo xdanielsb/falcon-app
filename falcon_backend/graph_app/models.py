@@ -32,3 +32,19 @@ class GraphMetadata(models.Model):
         Node, on_delete=models.CASCADE, related_name="destination_node"
     )
     autonomy = models.IntegerField()
+
+
+class BountyHunter(models.Model):
+    day = models.IntegerField()
+    planet = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.planet} (Day: {self.day})"
+
+
+class Empire(models.Model):
+    countdown = models.IntegerField()
+    bounty_hunters = models.ManyToManyField(BountyHunter, related_name="empires")
+
+    def __str__(self):
+        return f"Empire (Countdown: {self.countdown})"
