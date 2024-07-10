@@ -22,3 +22,13 @@ class Edge(models.Model):
 
     def __str__(self):
         return f"{self.source.name} -> {self.target.name} : {self.weight}"
+
+
+class GraphMetadata(models.Model):
+    source = models.ForeignKey(
+        Node, on_delete=models.CASCADE, related_name="departure_node"
+    )
+    target = models.ForeignKey(
+        Node, on_delete=models.CASCADE, related_name="destination_node"
+    )
+    autonomy = models.IntegerField()

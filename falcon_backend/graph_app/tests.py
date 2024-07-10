@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
 
 from graph_app.models import Edge, Node
-from graph_app.utils import graph_to_adj_list
+from graph_app.utils.graph import graph_to_adj_list
 from graph_app.views import graph_view, ShortestPathView
 
 

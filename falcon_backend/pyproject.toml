@@ -7,7 +7,10 @@ dependencies = [
     "Django==5.0.7",
     "django-filter==24.2",
     "djangorestframework==3.15.2", # https://www.django-rest-framework.org/
-    "Markdown==3.6"
+    "Markdown==3.6",
+    "django-extensions", # https://django-extensions.readthedocs.io/
+    "marshmallow==3.14.0", # https://marshmallow.readthedocs.io/
+    "python-dotenv==0.19.1", # https://pypi.org/project/python-dotenv/
 ]
 
 [build-system]

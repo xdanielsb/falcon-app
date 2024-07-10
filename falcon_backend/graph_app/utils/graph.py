@@ -2,7 +2,6 @@ from typing import TYPE_CHECKING
 
 from graph_app.models import Edge
 
-
 if TYPE_CHECKING:
     from tests.test_shortest_path import AdjListType
 

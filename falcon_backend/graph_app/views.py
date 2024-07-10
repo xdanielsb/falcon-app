@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from graph_app.models import Node, Edge
 from graph_app.serializers import NodeSerializer, EdgeSerializer
-from graph_app.utils import graph_to_adj_list
+from graph_app.utils.graph import graph_to_adj_list
 from logic.shortest_path import get_shortest_path_with_autonomy
 
 
