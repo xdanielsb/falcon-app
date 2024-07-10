@@ -11,6 +11,7 @@ dependencies = [
     "django-extensions", # https://django-extensions.readthedocs.io/
     "marshmallow==3.14.0", # https://marshmallow.readthedocs.io/
     "python-dotenv==0.19.1", # https://pypi.org/project/python-dotenv/
+    "django-cors-headers"
 ]
 
 [build-system]

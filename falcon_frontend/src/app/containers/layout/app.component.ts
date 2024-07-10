@@ -7,6 +7,7 @@ import {
 } from '@angular/material/sidenav';
 import { GraphFormComponent } from '../../components/graph-form/graph-form.component';
 import { GraphSettingsComponent } from '../../components/graph-settings/graph-settings.component';
+import { GraphService } from '../../services/graph.service';
 
 @Component({
   standalone: true,
@@ -23,5 +24,10 @@ import { GraphSettingsComponent } from '../../components/graph-settings/graph-se
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'falcon_frontend';
+  graph$ = this.graphService.getGraph();
+  constructor(private graphService: GraphService) {
+    this.graph$.subscribe((graph) => {
+      console.log(graph);
+    });
+  }
 }
