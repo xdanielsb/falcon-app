@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from graph_app.models import Node, Edge, Empire, GraphMetadata, BountyHunter
 from graph_app.serializers import NodeSerializer, EdgeSerializer, BountyHunterSerializer
+from graph_app.types.empire import BountyHunterWithPlanetId
 from graph_app.utils.graph import graph_to_adj_list
 from logic.probability_arriving import compute_probability_arrival
 from logic.shortest_path import get_shortest_path_with_autonomy
@@ -31,7 +32,7 @@ class ShortestPathView(views.APIView):
         target = get_object_or_404(Node, pk=request.data["targetId"])
         autonomy = request.data.get("autonomy", None)
 
-        dis, path = get_shortest_path_with_autonomy(
+        dis, path, stops = get_shortest_path_with_autonomy(
             source.pk, target.pk, graph_to_adj_list(Edge.objects.all()), autonomy
         )
         empire = Empire.objects.first()
@@ -41,11 +42,15 @@ class ShortestPathView(views.APIView):
             node = Node.objects.filter(name=bounty.planet).first()
             if node:
                 bounty_hunters_with_node_ids.append(
-                    {"day": bounty.day, "node_id": node.pk}
+                    BountyHunterWithPlanetId(**{"day": bounty.day, "node_id": node.pk})
                 )
 
         probability_arriving = compute_probability_arrival(
-            target.pk, (dis, path), empire.countdown, bounty_hunters_with_node_ids
+            target.pk,
+            (dis, path),
+            empire.countdown,
+            bounty_hunters_with_node_ids,
+            stops,
         )
         return JsonResponse(
             {"distances": dis, "path": path, "probability": probability_arriving}

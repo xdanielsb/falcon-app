@@ -45,7 +45,7 @@ def setup_galaxy() -> GraphDescType:
 def test_path_departure_equals_destiny(setup_galaxy: GraphDescType) -> None:
     planets, adj_list = setup_galaxy
 
-    dis_dict, path = get_shortest_path_with_autonomy(
+    dis_dict, path, _ = get_shortest_path_with_autonomy(
         planets["planet1"], planets["planet1"], adj_list, 4
     )
 
@@ -63,7 +63,7 @@ def test_simple_graph(setup_galaxy: GraphDescType) -> None:
     }
 
     expected_path = [planets["planet4"], planets["planet2"], planets["planet1"]]
-    actual_dis, path = get_shortest_path_with_autonomy(
+    actual_dis, path, _ = get_shortest_path_with_autonomy(
         planets["planet1"], planets["planet4"], adj_list, 4
     )
 
@@ -75,7 +75,7 @@ def test_no_possible_to_reach_destiny_no_path(setup_galaxy):
     planets, adj_list = setup_galaxy
     planets["planet6"] = 6
     adj_list[6] = []
-    actual_dis, path = get_shortest_path_with_autonomy(
+    actual_dis, path, _ = get_shortest_path_with_autonomy(
         planets["planet5"], planets["planet6"], adj_list, 4
     )
     assert actual_dis is None
@@ -104,10 +104,10 @@ def test_path_in_both_directions_should_result_in_the_same_weight(
     setup_galaxy: GraphDescType,
 ) -> None:
     planets, adj_list = setup_galaxy
-    actual_dis_one, path_one = get_shortest_path_with_autonomy(
+    actual_dis_one, path_one, _ = get_shortest_path_with_autonomy(
         planets["planet1"], planets["planet4"], adj_list, 4
     )
-    actual_dis_two, path_two = get_shortest_path_with_autonomy(
+    actual_dis_two, path_two, _ = get_shortest_path_with_autonomy(
         planets["planet4"], planets["planet1"], adj_list, 4
     )
 
@@ -129,7 +129,9 @@ def test_take_less_optimal_path_edge_weight_greater_than_autonomy(
         4: [(5, 4), (2, 5), (3, 4)],
         5: [(4, 4)],
     }
-    actual_dis, actual_path = get_shortest_path_with_autonomy(
+    actual_dis, actual_path, stops = get_shortest_path_with_autonomy(
         planets["planet1"], planets["planet5"], adj_list, 4
     )
-    assert actual_dis[planets["planet5"]] == 10 + 2  # stop in node 3 and 4 to refuel
+    assert actual_dis[planets["planet5"]] == 10 + len(
+        stops
+    )  # stop in node 3 and 4 to refuel

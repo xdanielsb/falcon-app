@@ -20,7 +20,7 @@ def get_shortest_path_with_autonomy(
     without refueling autonomy units of distance without refueling
 
     it returns a tuple with the distance from the departure to each node
-    the path from the source to the target node
+    the path from the source to the target node and the nodes where stops to refuel
 
     """
     if source not in adj_lists or target not in adj_lists:
@@ -42,6 +42,8 @@ def get_shortest_path_with_autonomy(
     distance_dict = {source: 0}
     # parent of each node, helps to rebuild the path
     parent = {}
+    # store the nodes ids where stops to refuel
+    stops = []
     # whether the paint is reach
     path_found = False
     # number of times it had to refuel
@@ -84,9 +86,10 @@ def get_shortest_path_with_autonomy(
                                 initial_autonomy - weight,
                             )
                         )
+                        stops.append(connection)
 
     if not path_found:
-        return None, None
+        return None, None, []
 
     # rebuild the path
     path = [target]
@@ -97,4 +100,5 @@ def get_shortest_path_with_autonomy(
 
     # only return the dis of nodes in path
     distance_dict = {key: value for key, value in distance_dict.items() if key in path}
-    return distance_dict, path
+    stops = [stop for stop in stops if stop in path]
+    return distance_dict, path, stops
