@@ -3,17 +3,17 @@ from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from graph_app.types.graph_desc import ShortestPathReturnType, AdjListType
+    from graph_app.types.graph_desc import FindPathReturnType, AdjListType
 
 
-def get_shortest_path_with_autonomy(
+def get_find_path_with_autonomy(
     source: int,
     target: int,
     adj_lists: "AdjListType",
     initial_autonomy: int | None = None,
-) -> "ShortestPathReturnType":
+) -> "FindPathReturnType":
     """
-    Compute the shortest path from departure to destiny
+    Find a path from departure to destiny, djiikstra algorithm with a twist :)
 
     it receives a dictionary with the adjacency lists of the graph
     and the autonomy that reflects that the vehicle can travel

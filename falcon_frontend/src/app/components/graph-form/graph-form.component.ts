@@ -46,7 +46,6 @@ export class GraphFormComponent implements OnChanges {
   @Input({ required: true }) odds!: number | null;
   @Input({ required: true }) graphInfo: GraphInfo | null = null;
 
-
   constructor(private fb: FormBuilder) {}
 
   computeOdds(): void {

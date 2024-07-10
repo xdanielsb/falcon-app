@@ -6,7 +6,7 @@ import { GraphService } from '../services/graph.service';
 import { of } from 'rxjs';
 import { Graph } from '../models/graph';
 import { Store } from '@ngrx/store';
-import { ShortestPath } from '../models/shortest-path';
+import { GraphPath } from '../models/graph-path';
 import { GraphInfo } from '../models/graph-info';
 @Injectable()
 export class GraphEffects {
@@ -43,9 +43,9 @@ export class GraphEffects {
             autonomy: action.autonomy,
           })
           .pipe(
-            map((shortestPath: ShortestPath) =>
+            map((graphPath: GraphPath) =>
               GraphActions.getOddsPathSuccess({
-                shortestPath: shortestPath,
+                graphPath: graphPath,
               }),
             ),
             catchError((error) =>

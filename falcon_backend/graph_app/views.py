@@ -8,8 +8,9 @@ from graph_app.models import Node, Edge, Empire, GraphMetadata, BountyHunter
 from graph_app.serializers import NodeSerializer, EdgeSerializer, BountyHunterSerializer
 from graph_app.types.empire import BountyHunterWithPlanetId
 from graph_app.utils.graph import graph_to_adj_list
+from logic.best_path_heuristic import find_best_path_heuristic
 from logic.probability_arriving import compute_probability_arrival
-from logic.shortest_path import get_shortest_path_with_autonomy
+from logic.find_path import get_find_path_with_autonomy
 
 
 @api_view(["GET"])
@@ -26,13 +27,13 @@ def graph_view(request):
     return Response({"nodes": node_serializer.data, "edges": edge_serializer.data})
 
 
-class ShortestPathView(views.APIView):
+class FindPathView(views.APIView):
     def post(self, request):
         source = get_object_or_404(Node, pk=request.data["sourceId"])
         target = get_object_or_404(Node, pk=request.data["targetId"])
         autonomy = request.data.get("autonomy", None)
 
-        dis, path, stops = get_shortest_path_with_autonomy(
+        dis, path, stops = find_best_path_heuristic(
             source.pk, target.pk, graph_to_adj_list(Edge.objects.all()), autonomy
         )
         empire = Empire.objects.first()

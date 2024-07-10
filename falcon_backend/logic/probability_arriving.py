@@ -1,10 +1,10 @@
 from graph_app.types.empire import BountyHunterWithPlanetId
-from graph_app.types.graph_desc import ShortestPathReturnType
+from graph_app.types.graph_desc import FindPathReturnType
 
 
 def compute_probability_arrival(
     target_id: int,
-    path_info: ShortestPathReturnType,
+    path_info: FindPathReturnType,
     countdown: int,
     bounty_hunters: list[BountyHunterWithPlanetId],
     stops: list[int],
@@ -32,7 +32,7 @@ def compute_probability_arrival(
                 ans -= (9**times) / (10 ** (times + 1))
             times += 1
 
-    #  iterate on stops in case repeated stops
+    #  iterate on stops in case of repeated stops
     for stop in stops:
         if stop in distance_dict.keys():
             if times == 0:

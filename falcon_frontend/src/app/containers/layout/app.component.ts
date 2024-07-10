@@ -20,7 +20,7 @@ import { Edge, Node } from '@swimlane/ngx-graph';
 import * as GraphActions from '../../store/graph.actions';
 import * as GraphSelectors from '../../store/graph.selectors';
 import { tap } from 'rxjs/operators';
-import { ShortestPath } from '../../models/shortest-path';
+import { GraphPath } from '../../models/graph-path';
 import { GraphInfoComponent } from '../../components/graph-info/graph-info.component';
 import { GraphInfo } from '../../models/graph-info';
 
@@ -65,8 +65,8 @@ export class AppComponent {
       .subscribe();
     this.store$
       .pipe(
-        select(GraphSelectors.shortestPathSelector),
-        tap((res: ShortestPath | null) => {
+        select(GraphSelectors.findPathSelector),
+        tap((res: GraphPath | null) => {
           if (this.graph && res) {
             this.odds = res.probability;
             const nodes: Node[] = (this.graph?.nodes || []).map((node) => {

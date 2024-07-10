@@ -1,5 +1,5 @@
 import { Node, Edge } from '@swimlane/ngx-graph';
-import { ShortestPath } from '../models/shortest-path';
+import { GraphPath } from '../models/graph-path';
 import { GraphInfo } from '../models/graph-info';
 
 export interface GlobalState {
@@ -11,7 +11,7 @@ export interface GraphState {
   nodes: Node[];
   edges: Edge[];
   error: string | null;
-  shortestPath: ShortestPath | null;
+  graphPath: GraphPath | null;
   graphInfo: GraphInfo | null;
 }
 
@@ -20,6 +20,6 @@ export const initialState: GraphState = {
   nodes: [],
   edges: [],
   error: null,
-  shortestPath: null,
+  graphPath: null,
   graphInfo: null,
 };

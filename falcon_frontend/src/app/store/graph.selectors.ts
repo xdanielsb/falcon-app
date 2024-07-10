@@ -11,8 +11,8 @@ export const graphSelector = createSelector(selectFeature, (state) => {
   return { nodes: state.nodes, edges: state.edges };
 });
 
-export const shortestPathSelector = createSelector(selectFeature, (state) => {
-  return state.shortestPath;
+export const findPathSelector = createSelector(selectFeature, (state) => {
+  return state.graphPath;
 });
 
 export const graphInfoSelector = createSelector(selectFeature, (state) => {

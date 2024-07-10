@@ -7,7 +7,7 @@ import {
   GraphResponse,
   parseGraph,
 } from '../models/graph';
-import { ShortestPath } from '../models/shortest-path';
+import { GraphPath } from '../models/graph-path';
 import { ApiUrls } from '../api.urls';
 import { GraphInfo } from '../models/graph-info';
 
@@ -23,8 +23,8 @@ export class GraphService {
       .pipe(map((response) => parseGraph(response)));
   }
 
-  computeOdds(input: GraphMetadataForm): Observable<ShortestPath> {
-    return this.http.post<ShortestPath>(ApiUrls.ShortestPathUrl, {
+  computeOdds(input: GraphMetadataForm): Observable<GraphPath> {
+    return this.http.post<GraphPath>(ApiUrls.FindPathUrl, {
       ...input,
       autonomy: Number.parseInt(<string>input.autonomy || '0'),
     });

@@ -17,6 +17,4 @@ describe('AppComponent', () => {
       'Welcome falcon_frontend',
     );
   });
-
-
 });

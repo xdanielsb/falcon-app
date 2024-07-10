@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from graph_app.models import Edge
 
 if TYPE_CHECKING:
-    from tests.logic.test_shortest_path import AdjListType
+    from tests.logic.test_find_path import AdjListType
 
 
 def graph_to_adj_list(edges: list[Edge]) -> "AdjListType":

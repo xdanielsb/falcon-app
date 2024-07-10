@@ -28,7 +28,7 @@ export const graphReducers = createReducer(
   on(GraphActions.getOddsPathSuccess, (state: GraphState, action) => ({
     ...state,
     isLoading: false,
-    shortestPath: action.shortestPath,
+    graphPath: action.graphPath,
   })),
   on(GraphActions.getOddsFailure, (state: GraphState, action) => ({
     ...state,

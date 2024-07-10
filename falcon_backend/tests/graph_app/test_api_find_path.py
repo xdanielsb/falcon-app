@@ -4,12 +4,12 @@ from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
 
 from graph_app.models import Edge, Node, BountyHunter, Empire
-from graph_app.views import ShortestPathView
+from graph_app.views import FindPathView
 
 
-class TestShortestPathView(APITestCase, URLPatternsTestCase):
+class TestFindPathView(APITestCase, URLPatternsTestCase):
     urlpatterns = [
-        path("shortest-path/", ShortestPathView.as_view(), name="shortest-path"),
+        path("find-path/", FindPathView.as_view(), name="find-path"),
     ]
 
     def setUp(self):
@@ -28,9 +28,9 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         empire.bounty_hunters.add(self.bounty_hunter_2)
 
     @override_settings(DEBUG=True)
-    def test_shortest_path_valid_with_autonomy(self):
+    def test_find_path_valid_with_autonomy(self):
         data = {"sourceId": self.node1.pk, "targetId": self.node3.pk, "autonomy": 100}
-        response = self.client.post(reverse("shortest-path"), data, format="json")
+        response = self.client.post(reverse("find-path"), data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
@@ -38,12 +38,12 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         assert sorted(res["path"]) == [self.node1.pk, self.node3.pk]
 
     @override_settings(DEBUG=True)
-    def test_shortest_path_valid_without_autonomy(self):
+    def test_find_path_valid_without_autonomy(self):
         data = {
             "sourceId": self.node2.pk,
             "targetId": self.node1.pk,
         }
-        response = self.client.post(reverse("shortest-path"), data, format="json")
+        response = self.client.post(reverse("find-path"), data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("distances", response.json())
@@ -51,19 +51,19 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         self.assertIn("probability", response.json())
 
     @override_settings(DEBUG=True)
-    def test_shortest_path_missing_node(self):
+    def test_find_path_missing_node(self):
         data = {
             "sourceId": 100,  # this node does not exist
             "targetId": self.node3.pk,
         }
-        response = self.client.post(reverse("shortest-path"), data, format="json")
+        response = self.client.post(reverse("find-path"), data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     @override_settings(DEBUG=True)
     def test_autonomy_is_lower_than_minimun_distance(self):
         data = {"sourceId": self.node1.pk, "targetId": self.node3.pk, "autonomy": 0}
-        response = self.client.post(reverse("shortest-path"), data, format="json")
+        response = self.client.post(reverse("find-path"), data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
