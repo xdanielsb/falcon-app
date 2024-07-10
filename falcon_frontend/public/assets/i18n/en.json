@@ -1,5 +1,5 @@
 {
-  "GRAPH_MANAGEMENT.TITLE": "Gestion du graphe",
+  "GRAPH_MANAGEMENT.TITLE": "Settings",
   "GRAPH_MANAGEMENT.DEPARTURE": "Departure",
   "GRAPH_MANAGEMENT.DESTINATION": "Destination",
   "GRAPH_MANAGEMENT.AUTONOMY": "Autonomy",
@@ -10,5 +10,11 @@
   "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Number of edges",
   "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Number of hunters",
   "GRAPH_MANAGEMENT.COUNTDOWN": "Countdown",
-  "GRAPH_MANAGEMENT.INFO": "Graph information"
+  "GRAPH_MANAGEMENT.INFO": "Graph information",
+  "GRAPH_MANAGEMENT.ADMINISTRATION": "Graph administration",
+  "GRAPH_MANAGEMENT.API": "API",
+  "GRAPH_MANAGEMENT.KIBANA_LOGS": "Falcon app logs",
+  "GRAPH_MANAGEMENT.METRIC_BEAT_LOGS": "Falcon metrics",
+  "GRAPH_MANAGEMENT.KIBANA_LOGS.TOOLTIP": "To be able to use this option, you must start docker-compose-dev.yml so that the Kibana logs are available",
+  "GRAPH_MANAGEMENT.METRCI_LOGS.TOOLTIP": "To be able to use this option, you must start docker-compose-dev.yml so that metric beat logs are available"
 }

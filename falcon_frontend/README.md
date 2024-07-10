@@ -1,9 +1,10 @@
 # Falcon frontend
 
 ### Run with docker
+
 ```
- $ docker build  -t falcon-frontend . 
- $ docker run -p 4200:4200  -t falcon-frontend 
+ $ docker build  -t falcon-frontend .
+ $ docker run -p 4200:4200  -t falcon-frontend
 ```
 
 ## Setup for development

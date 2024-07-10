@@ -1,8 +1,15 @@
 <mat-drawer-container>
-  <mat-drawer mode="side" opened>
+  <mat-drawer mode="side" opened #drawer>
     <app-graph-settings />
   </mat-drawer>
   <mat-drawer-content>
+    <button class="toggle-button" mat-mini-fab (click)="drawer.toggle()">
+      <mat-icon>
+        {{
+          drawer.opened ? 'arrow_back_ios_new' : 'arrow_forward_ios'
+        }}</mat-icon
+      >
+    </button>
     @if (graph !== null) {
       <div class="content">
         <div>

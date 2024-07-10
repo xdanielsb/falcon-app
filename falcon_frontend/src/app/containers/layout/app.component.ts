@@ -23,6 +23,8 @@ import { tap } from 'rxjs/operators';
 import { GraphPath } from '../../models/graph-path';
 import { GraphInfoComponent } from '../../components/graph-info/graph-info.component';
 import { GraphInfo } from '../../models/graph-info';
+import { MatIcon } from '@angular/material/icon';
+import { MatMiniFabButton } from '@angular/material/button';
 
 @Component({
   standalone: true,
@@ -36,6 +38,8 @@ import { GraphInfo } from '../../models/graph-info';
     TranslateModule,
     GraphPreviewComponent,
     GraphInfoComponent,
+    MatIcon,
+    MatMiniFabButton,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

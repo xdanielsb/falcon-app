@@ -1,1 +1,43 @@
 <h2>{{ 'GRAPH_MANAGEMENT.TITLE' | translate }}</h2>
+
+<mat-list-item>
+  <mat-icon class="big-icon" matListItemIcon>miscellaneous_services</mat-icon>
+  <a href="http://localhost:8000/admin" target="_blank">
+    <span>
+      {{ 'GRAPH_MANAGEMENT.ADMINISTRATION' | translate }}
+    </span>
+  </a>
+</mat-list-item>
+
+<mat-list-item>
+  <mat-icon class="big-icon" matListItemIcon>manage_search</mat-icon>
+  <a href="http://localhost:8000/graph" target="_blank">
+    <span>
+      {{ 'GRAPH_MANAGEMENT.API' | translate }}
+    </span>
+  </a>
+</mat-list-item>
+
+<mat-list-item>
+  <mat-icon class="big-icon" matListItemIcon>dashboard</mat-icon>
+  <a href="http://localhost:9200" target="_blank">
+    <span>
+      {{ 'GRAPH_MANAGEMENT.KIBANA_LOGS' | translate }}
+    </span>
+    <mat-icon [matTooltip]="'GRAPH_MANAGEMENT.KIBANA_LOGS.TOOLTIP' | translate"
+      >info</mat-icon
+    >
+  </a>
+</mat-list-item>
+
+<mat-list-item>
+  <mat-icon class="big-icon" matListItemIcon>ssid_chart</mat-icon>
+  <a href="http://localhost:9200" target="_blank">
+    <span>
+      {{ 'GRAPH_MANAGEMENT.METRIC_BEAT_LOGS' | translate }}
+    </span>
+    <mat-icon [matTooltip]="'GRAPH_MANAGEMENT.METRCI_LOGS.TOOLTIP' | translate"
+      >info</mat-icon
+    >
+  </a>
+</mat-list-item>

@@ -1,0 +1,22 @@
+mat-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+  height: 50px;
+}
+
+a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  color: black;
+}
+
+.big-icon {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
