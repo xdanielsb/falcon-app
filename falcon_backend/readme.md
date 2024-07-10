@@ -32,8 +32,8 @@ $ python manage.py runserver
 
 #### Running tests
 ```sh
-# unit tests 
+# unit tests algorithm
 $ pytest
-# api tests
-$ python manage.py test graph_app.tests
+# rest api/utils/graph tests 
+$ python manage.py test
 ```

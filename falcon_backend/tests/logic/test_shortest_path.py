@@ -1,12 +1,7 @@
 import pytest
 
+from graph_app.types.graph_desc import GraphDescType
 from logic.shortest_path import get_shortest_path_with_autonomy
-
-from typing import Tuple, Dict, List
-
-AdjListType = Dict[int, List[Tuple[int, int]]]
-
-GraphDescType = Tuple[Dict[str, int], AdjListType]
 
 
 @pytest.fixture

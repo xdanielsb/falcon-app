@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from tests.test_shortest_path import AdjListType
+    from graph_app.types.graph_desc import AdjListType
 
 
 def get_shortest_path_with_autonomy(
