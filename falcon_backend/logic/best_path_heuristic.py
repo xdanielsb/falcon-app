@@ -1,36 +1,22 @@
 import random
 from typing import TYPE_CHECKING
 
-from falcon_backend.logger import get_logger
+from graph_app.types.empire import BountyHunterWithPlanetId
 from logic.find_path import get_find_path_with_autonomy
+from logic.probability_arriving import compute_probability_arrival
 
 if TYPE_CHECKING:
     from graph_app.types.graph_desc import FindPathReturnType, AdjListType
 
 
-def modify_one_edge_to_infinity(adj_lists: "AdjListType", best_current_path: list[int]):
+def get_random_node_to_disable(best_current_path: list[int]):
     len_path = len(best_current_path)
 
-    if len_path < 2:
-        return adj_lists
+    if len_path <= 2:
+        return None
 
-    modified_adj_lists = adj_lists.copy()
-    random_index = random.randint(0, len_path - 2)
-    count = 0
-    for node, weight in modified_adj_lists[best_current_path[random_index]]:
-        if node == best_current_path[random_index + 1]:
-            modified_adj_lists[best_current_path[random_index]][count] = (
-                node,
-                float("inf"),
-            )
-            get_logger().info(
-                f"Modified edge to infinity {best_current_path[random_index]} -> {node} = inf"
-            )
-            break
-        else:
-            count += 1
-
-    return modified_adj_lists
+    random_index = random.randint(1, len_path - 2)
+    return best_current_path[random_index]
 
 
 def find_best_path_heuristic(
@@ -38,6 +24,8 @@ def find_best_path_heuristic(
     target: int,
     adj_lists: "AdjListType",
     initial_autonomy: int,
+    countdown: int,
+    bounty_hunters: list[BountyHunterWithPlanetId],
     iterations=5,
 ) -> "FindPathReturnType":
     """
@@ -46,29 +34,32 @@ def find_best_path_heuristic(
     of that best path so that the algorithm will find another path, and I will keep the best path found until
     the end of the iterations
     """
-    best_distance = float("inf")
     best_path = None
     best_stops = []
     best_total_distance_dict = {}
+    best_probability = 0.0
 
     for i in range(iterations):
-        modified_adj_lists = (
-            modify_one_edge_to_infinity(adj_lists, best_path)
-            if best_path is not None
-            else adj_lists.copy()
-        )
-        distance_dict, path, stops = get_find_path_with_autonomy(
-            source, target, modified_adj_lists, initial_autonomy
-        )
-        if path is not None:
-            total_distance = distance_dict[target]
-            if total_distance < best_distance:
-                best_distance = total_distance
-                best_path = path
-                best_stops = stops
-                best_total_distance_dict = distance_dict
-        get_logger().info(
-            f"Best path found so far: {best_path}, with distance: {best_distance}, iteration {i} / {iterations}"
+        if best_path is None:
+            disabled_node = None
+        else:
+            disabled_node = get_random_node_to_disable(best_path)
+
+        distance_dict, path, node_ids_refuel = get_find_path_with_autonomy(
+            source, target, adj_lists, initial_autonomy, [disabled_node]
         )
 
-    return best_total_distance_dict, best_path, best_stops
+        probability_arriving = compute_probability_arrival(
+            target,
+            (distance_dict, path),
+            countdown,
+            bounty_hunters,
+            node_ids_refuel,
+        )
+        if probability_arriving > best_probability:
+            best_probability = probability_arriving
+            best_path = path
+            best_stops = node_ids_refuel
+            best_total_distance_dict = distance_dict
+
+    return best_total_distance_dict, best_path, best_stops, best_probability

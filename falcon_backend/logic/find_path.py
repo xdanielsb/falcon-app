@@ -12,6 +12,7 @@ def get_find_path_with_autonomy(
     target: int,
     adj_lists: "AdjListType",
     initial_autonomy: int | None = None,
+    disabled_nodes: list[int] | None = None,
 ) -> "FindPathReturnType":
     """
     Find a path from departure to destiny, djiikstra algorithm with a twist :)
@@ -51,6 +52,11 @@ def get_find_path_with_autonomy(
     # whether the paint is reach
     path_found = False
     # number of times it had to refuel
+
+    if disabled_nodes is not None:
+        for disabled_node in disabled_nodes:
+            visited.add(disabled_node)
+
     while not pq.empty():
         d, node, autonomy = pq.get()
 
@@ -64,6 +70,8 @@ def get_find_path_with_autonomy(
 
         if node in adj_lists:
             for connection, weight in adj_lists[node]:
+                if disabled_nodes is not None and connection in disabled_nodes:
+                    continue
                 if autonomy - weight >= 0:
                     if (
                         connection not in distance_dict
@@ -90,7 +98,8 @@ def get_find_path_with_autonomy(
                                 initial_autonomy - weight,
                             )
                         )
-                        stops.append(connection)
+                        # the stop is in the current node not in the connection
+                        stops.append(node)
 
     if not path_found:
         return None, None, []

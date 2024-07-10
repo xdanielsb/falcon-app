@@ -14,6 +14,7 @@ Once this is done you can go to http://localhost:8000/graph/ and see the api :).
 The initial configuration is in the .env file
 ```sh
     MILLENNIUM_FALCON_PATH=./tests/cases/case1/millennium-falcon.json
+    EMPIRE_PATH=./tests/cases/case1/empire.json
 ```
 
 ### Create a virtualenv
@@ -23,6 +24,11 @@ The initial configuration is in the .env file
   $ pip3 install -r requirements-dev.txt --no-cache-dir
   $ # load the initial configuration (read the .env file and create the data on the db)
   $ python manage.py runscript init_db
+```
+
+### Run the cli to compute the odds
+```sh
+ $ python manage.py give_me_the_odds ./tests/cases/case4/millennium-falcon.json ./tests/cases/case4/empire.json  
 ```
 
 #### run

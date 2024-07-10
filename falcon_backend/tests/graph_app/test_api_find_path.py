@@ -67,5 +67,5 @@ class TestFindPathView(APITestCase, URLPatternsTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
-            response.json(), {"distances": None, "path": None, "probability": 0}
+            response.json(), {"distances": {}, "path": None, "probability": 0.0}
         )

@@ -51,8 +51,8 @@ def test_simple_graph(setup_galaxy: GraphDescType) -> None:
     }
 
     expected_path = [planets["planet4"], planets["planet2"], planets["planet1"]]
-    actual_dis, path, _ = find_best_path_heuristic(
-        planets["planet1"], planets["planet4"], adj_list, 4
+    actual_dis, path, _, _ = find_best_path_heuristic(
+        planets["planet1"], planets["planet4"], adj_list, 4, 10, []
     )
 
     assert expected_dis == actual_dis

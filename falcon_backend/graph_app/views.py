@@ -10,7 +10,6 @@ from graph_app.serializers import NodeSerializer, EdgeSerializer, BountyHunterSe
 from graph_app.types.empire import BountyHunterWithPlanetId
 from graph_app.utils.graph import graph_to_adj_list
 from logic.best_path_heuristic import find_best_path_heuristic
-from logic.probability_arriving import compute_probability_arrival
 
 
 @api_view(["GET"])
@@ -33,9 +32,6 @@ class FindPathView(views.APIView):
         target = get_object_or_404(Node, pk=request.data["targetId"])
         autonomy = request.data.get("autonomy", None)
 
-        dis, path, stops = find_best_path_heuristic(
-            source.pk, target.pk, graph_to_adj_list(Edge.objects.all()), autonomy
-        )
         empire = Empire.objects.first()
         bounty_hunters_with_node_ids = []
 
@@ -46,12 +42,13 @@ class FindPathView(views.APIView):
                     BountyHunterWithPlanetId(**{"day": bounty.day, "node_id": node.pk})
                 )
 
-        probability_arriving = compute_probability_arrival(
+        dis, path, stops, probability_arriving = find_best_path_heuristic(
+            source.pk,
             target.pk,
-            (dis, path),
+            graph_to_adj_list(Edge.objects.all()),
+            autonomy,
             empire.countdown,
             bounty_hunters_with_node_ids,
-            stops,
         )
         get_logger().info(f"Probability computed: {probability_arriving}")
         return JsonResponse(

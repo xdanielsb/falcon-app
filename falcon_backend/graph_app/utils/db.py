@@ -68,12 +68,16 @@ def load_graph_metadata(metadata_path: str) -> None:
     get_logger().info("Graph metadata loaded")
 
 
-def load_initial_db() -> None:
+def load_initial_db(path: str | None = None) -> None:
     """
     load the initial database configuration given the path of a file store in the value of an .env variable
     """
     config = dotenv_values(".env")
-    path_configuration = config["MILLENNIUM_FALCON_PATH"]
+    if path is not None:
+        path_configuration = path
+    else:
+        path_configuration = config["MILLENNIUM_FALCON_PATH"]
+
     if not path_configuration:
         get_logger().error("MILLENNIUM_FALCON_PATH not found in .env")
         raise ValueError("MILLENNIUM_FALCON_PATH not found in .env")
@@ -87,12 +91,17 @@ def load_initial_db() -> None:
     load_graph_metadata(path_configuration)
 
 
-def load_empire_info() -> None:
+def load_empire_info(path: str | None = None) -> None:
     """
     load the empire information
     """
     config = dotenv_values(".env")
-    path_configuration = config["EMPIRE_PATH"]
+
+    if path is not None:
+        path_configuration = path
+    else:
+        path_configuration = config["EMPIRE_PATH"]
+
     if not path_configuration:
         get_logger().error("EMPIRE_PATH not found in .env")
         raise ValueError("EMPIRE_PATH not found in .env")

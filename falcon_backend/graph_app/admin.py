@@ -1,11 +1,11 @@
 # Register your models here.
 from django.contrib import admin
 
-from graph_app.models import Node, Edge, GraphMetadata, Empire, BountyHunter
+from graph_app.models import Node, Edge, Empire
 
-admin.site.site_title = 'Milleniun Falcon'
-admin.site.site_header = 'Milleniun falcon'
-admin.site.index_title = 'Milleniun control'
+admin.site.site_title = "Milleniun Falcon"
+admin.site.site_header = "Milleniun falcon"
+admin.site.index_title = "Milleniun control"
 
 admin.site.register(Node)
 admin.site.register(Edge)

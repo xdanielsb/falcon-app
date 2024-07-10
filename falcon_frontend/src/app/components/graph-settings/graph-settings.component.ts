@@ -56,7 +56,7 @@ export class GraphSettingsComponent {
     translate.use('en');
   }
 
-  selectLanguage(code: string) {
+  selectLanguage(code: string): void {
     this.translate.use(code);
     this.language =
       this.languages.find((lang) => lang.value === code) || this.languages[0];
