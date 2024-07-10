@@ -31,7 +31,7 @@
     mat-raised-button
     color="primary"
     (click)="computeOdds()"
-    [disabled]="form.invalid"
+    [disabled]="form.invalid || loading"
   >
     {{ 'GRAPH_MANAGEMENT.COMPUTE_ODDS' | translate }}
   </button>
@@ -40,6 +40,7 @@
 @if (odds !== null) {
   <div class="odds">
     {{ 'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate }}
-    {{ odds | percent }}
+    {{ loading ?'-' : (odds | percent) }}
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
   </div>
 }

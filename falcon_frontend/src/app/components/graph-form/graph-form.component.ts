@@ -16,6 +16,7 @@ import { MatInput } from '@angular/material/input';
 import { AppForm } from '../../utils/form';
 import { Graph, GraphMetadataForm } from '../../models/graph';
 import { GraphInfo } from '../../models/graph-info';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-graph-form',
@@ -30,6 +31,7 @@ import { GraphInfo } from '../../models/graph-info';
     TranslateModule,
     ReactiveFormsModule,
     MatInput,
+    MatProgressSpinner
   ],
   templateUrl: './graph-form.component.html',
   styleUrl: './graph-form.component.scss',
@@ -45,6 +47,7 @@ export class GraphFormComponent implements OnChanges {
   @Input({ required: true }) graph!: Graph;
   @Input({ required: true }) odds!: number | null;
   @Input({ required: true }) graphInfo: GraphInfo | null = null;
+  @Input({required: true}) loading!: boolean;
 
   constructor(private fb: FormBuilder) {}
 
