@@ -1,5 +1,5 @@
 export enum ApiUrls {
-  GraphUrl = 'http://localhost:8000/graph/',
-  FindPathUrl = 'http://localhost:8000/find-path/',
-  GraphInfoUrl = 'http://localhost:8000/graph-info/',
+  GraphUrl = 'http://0.0.0.0:8000/graph/',
+  FindPathUrl = 'http://0.0.0.0:8000/find-path/',
+  GraphInfoUrl = 'http://0.0.0.0:8000/graph-info/',
 }
