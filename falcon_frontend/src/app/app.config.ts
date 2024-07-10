@@ -16,6 +16,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { graphReducers } from './store/graph.reducers';
 import { GraphEffects } from './store/graph.effects';
 import { provideEffects } from '@ngrx/effects';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,5 +59,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     importProvidersFrom(TranslateModule.forRoot(translateModuleConfig)),
     ...storeProviders,
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline', subscriptSizing: 'dynamic' },
+    },
   ],
 };

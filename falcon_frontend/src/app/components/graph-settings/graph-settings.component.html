@@ -1,4 +1,27 @@
-<h2>{{ 'GRAPH_MANAGEMENT.TITLE' | translate }}</h2>
+<div class="header">
+  <h2>{{ 'GRAPH_MANAGEMENT.TITLE' | translate }}</h2>
+
+  <mat-form-field>
+    <mat-select [value]="language.value" (valueChange)="selectLanguage($event)">
+      <mat-select-trigger>
+        <div class="trigger">
+          <img [src]="language.img" class="flag" alt="" />
+          <span>{{ language.label | translate }}</span>
+        </div>
+      </mat-select-trigger>
+      <mat-option
+        *ngFor="let opt of languages"
+        [value]="opt.value"
+        [matTooltip]="opt.label | translate"
+      >
+        <div class="trigger">
+          <img [src]="opt.img" class="flag" alt="opt.label" />
+          <span>{{ opt.value }}</span>
+        </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 
 <mat-list-item>
   <mat-icon class="big-icon" matListItemIcon>miscellaneous_services</mat-icon>

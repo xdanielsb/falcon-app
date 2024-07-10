@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 mat-list-item {
   display: flex;
   flex-direction: row;
@@ -16,7 +18,29 @@ a {
   color: black;
 }
 
+mat-form-field {
+  @include mat.form-field-density(-6);
+  width: 76px;
+}
+
 .big-icon {
   transform: scale(1.5);
   margin-right: 10px;
+}
+
+.trigger {
+  display: flex;
+  justify-content: start;
+  gap: 4px;
+  align-items: center;
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
