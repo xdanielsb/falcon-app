@@ -4,8 +4,8 @@ from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from graph_app.models import Node, Edge, Empire
-from graph_app.serializers import NodeSerializer, EdgeSerializer
+from graph_app.models import Node, Edge, Empire, GraphMetadata, BountyHunter
+from graph_app.serializers import NodeSerializer, EdgeSerializer, BountyHunterSerializer
 from graph_app.utils.graph import graph_to_adj_list
 from logic.probability_arriving import compute_probability_arrival
 from logic.shortest_path import get_shortest_path_with_autonomy
@@ -40,4 +40,25 @@ class ShortestPathView(views.APIView):
         )
         return JsonResponse(
             {"distances": dis, "path": path, "probability": probability_arriving}
+        )
+
+
+class GraphInfoView(views.APIView):
+    def get(self, request):
+        graph_info = GraphMetadata.objects.first()
+        empire = Empire.objects.first()
+        hunters = BountyHunter.objects.all()
+        bounty_hunters = BountyHunterSerializer(
+            hunters, many=True, context={"request": request}
+        ).data
+        return Response(
+            {
+                "numberOfNodes": Node.objects.count(),
+                "numberOfEdges": Edge.objects.count(),
+                "hunters": bounty_hunters,
+                "countDown": empire.countdown,
+                "sourceId": graph_info.source.pk,
+                "targetId": graph_info.target.pk,
+                "autonomy": graph_info.autonomy,
+            }
         )

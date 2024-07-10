@@ -21,6 +21,8 @@ import * as GraphActions from '../../store/graph.actions';
 import * as GraphSelectors from '../../store/graph.selectors';
 import { tap } from 'rxjs/operators';
 import { ShortestPath } from '../../models/shortest-path';
+import { GraphInfoComponent } from '../../components/graph-info/graph-info.component';
+import { GraphInfo } from '../../models/graph-info';
 
 @Component({
   standalone: true,
@@ -33,6 +35,7 @@ import { ShortestPath } from '../../models/shortest-path';
     GraphSettingsComponent,
     TranslateModule,
     GraphPreviewComponent,
+    GraphInfoComponent,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,6 +44,7 @@ import { ShortestPath } from '../../models/shortest-path';
 export class AppComponent {
   loading = false;
   graph: Graph | null = null;
+  graphInfo: GraphInfo | null = null;
   odds: number | null = null;
 
   constructor(
@@ -65,7 +69,6 @@ export class AppComponent {
         tap((res: ShortestPath | null) => {
           if (this.graph && res) {
             this.odds = res.probability;
-            console.log(this.odds);
             const nodes: Node[] = (this.graph?.nodes || []).map((node) => {
               return {
                 ...node,
@@ -77,6 +80,15 @@ export class AppComponent {
             });
             this.graph = { ...this.graph, nodes };
           }
+        }),
+      )
+      .subscribe();
+
+    this.store$
+      .pipe(
+        select(GraphSelectors.graphInfoSelector),
+        tap((graphInfo: GraphInfo | null) => {
+          this.graphInfo = graphInfo;
         }),
       )
       .subscribe();

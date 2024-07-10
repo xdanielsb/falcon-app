@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Node, Edge } from '@swimlane/ngx-graph';
 import { ShortestPath } from '../models/shortest-path';
+import { GraphInfo } from '../models/graph-info';
 // graph
 export const getGraph = createAction('[Graph] Get graph');
 export const getGraphSuccess = createAction(
@@ -23,5 +24,16 @@ export const getOddsPathSuccess = createAction(
 );
 export const getOddsFailure = createAction(
   '[Graph] Get odds failure',
+  props<{ error: string }>(),
+);
+
+// graph info
+export const getGraphInfo = createAction('[Graph] Get graph info');
+export const getGraphInfoSuccess = createAction(
+  '[Graph] Get graph info success',
+  props<{ graphInfo: GraphInfo }>(),
+);
+export const getGraphInfoFailure = createAction(
+  '[Graph] Get graph info failure',
   props<{ error: string }>(),
 );

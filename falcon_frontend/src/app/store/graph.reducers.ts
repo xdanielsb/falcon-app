@@ -35,4 +35,19 @@ export const graphReducers = createReducer(
     isLoading: false,
     error: action.error,
   })),
+  // get graph info
+  on(GraphActions.getGraphInfo, (state: GraphState) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(GraphActions.getGraphInfoSuccess, (state: GraphState, action) => ({
+    ...state,
+    isLoading: false,
+    graphInfo: action.graphInfo,
+  })),
+  on(GraphActions.getGraphInfoFailure, (state: GraphState, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
 );

@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { Graph } from '../models/graph';
 import { Store } from '@ngrx/store';
 import { ShortestPath } from '../models/shortest-path';
+import { GraphInfo } from '../models/graph-info';
 @Injectable()
 export class GraphEffects {
   getGraph$ = createEffect(() =>
@@ -24,6 +25,9 @@ export class GraphEffects {
             of(GraphActions.getGraphFailure({ error: error.message })),
           ),
         );
+      }),
+      tap(() => {
+        this.store$.dispatch(GraphActions.getGraphInfo());
       }),
     ),
   );
@@ -48,6 +52,24 @@ export class GraphEffects {
               of(GraphActions.getOddsFailure({ error: error.message })),
             ),
           );
+      }),
+    ),
+  );
+
+  getGraphInfo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GraphActions.getGraphInfo),
+      switchMap(() => {
+        return this.graphService.getGraphInfo().pipe(
+          map((graphInfo: GraphInfo) =>
+            GraphActions.getGraphInfoSuccess({
+              graphInfo: graphInfo,
+            }),
+          ),
+          catchError((error) =>
+            of(GraphActions.getGraphInfoFailure({ error: error.message })),
+          ),
+        );
       }),
     ),
   );

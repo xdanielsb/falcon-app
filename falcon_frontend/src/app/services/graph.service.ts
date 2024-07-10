@@ -9,6 +9,7 @@ import {
 } from '../models/graph';
 import { ShortestPath } from '../models/shortest-path';
 import { ApiUrls } from '../api.urls';
+import { GraphInfo } from '../models/graph-info';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,9 @@ export class GraphService {
       ...input,
       autonomy: Number.parseInt(<string>input.autonomy || '0'),
     });
+  }
+
+  getGraphInfo(): Observable<GraphInfo> {
+    return this.http.get<GraphInfo>(ApiUrls.GraphInfoUrl);
   }
 }

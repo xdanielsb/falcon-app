@@ -1,0 +1,22 @@
+<section class="select-route">
+  <h3>{{ 'GRAPH_MANAGEMENT.INFO' | translate }}</h3>
+
+  @if (graphInfo !== null) {
+    <mat-table [dataSource]="graphDataSource">
+      <ng-container matColumnDef="label">
+        <mat-header-cell *matHeaderCellDef> Label </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.label | translate }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.value }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  }
+</section>

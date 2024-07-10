@@ -5,11 +5,14 @@
   <mat-drawer-content>
     @if (graph !== null) {
       <div class="content">
-        <app-graph-form
-          [graph]="graph"
-          [odds]="odds"
-          (computeOddsEvent)="computeOdds($event)"
-        />
+        <div>
+          <app-graph-form
+            [graph]="graph"
+            [odds]="odds"
+            (computeOddsEvent)="computeOdds($event)"
+          />
+          <app-graph-info [graphInfo]="graphInfo" />
+        </div>
         <app-graph-preview [graph]="graph" />
       </div>
     }

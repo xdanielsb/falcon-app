@@ -95,5 +95,5 @@ def test_path_in_both_directions_should_result_in_the_same_weight(
         planets["planet4"], planets["planet1"], adj_list, 4
     )
 
-    assert  actual_dis_one[planets["planet4"]] == actual_dis_two[planets["planet1"]]
+    assert actual_dis_one[planets["planet4"]] == actual_dis_two[planets["planet1"]]
     assert sorted(path_one) == sorted(path_two)
