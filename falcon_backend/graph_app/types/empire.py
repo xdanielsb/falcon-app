@@ -4,6 +4,12 @@ from marshmallow import Schema, post_load, fields
 
 
 @dataclass
+class BountyHunterWithPlanetId:
+    day: int
+    node_id: int
+
+
+@dataclass
 class BountyHunterDC:
     day: int
     planet: str

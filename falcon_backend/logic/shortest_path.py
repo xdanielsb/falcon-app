@@ -58,13 +58,32 @@ def get_shortest_path_with_autonomy(
 
         if node in adj_lists:
             for connection, weight in adj_lists[node]:
-                if (
-                    connection not in distance_dict
-                    or distance_dict[connection] > d + weight
-                ):
-                    distance_dict[connection] = d + weight
-                    parent[connection] = node
-                    pq.put((distance_dict[connection], connection, autonomy - weight))
+                if autonomy - weight >= 0:
+                    if (
+                        connection not in distance_dict
+                        or distance_dict[connection] > d + weight
+                    ):
+                        distance_dict[connection] = d + weight
+                        parent[connection] = node
+                        pq.put(
+                            (distance_dict[connection], connection, autonomy - weight)
+                        )
+                elif initial_autonomy >= weight:
+                    # if autonomy is not enough, refuel and go to neighbor
+                    # +1 because refueling takes 1 time unit
+                    if (
+                        connection not in distance_dict
+                        or distance_dict[connection] > d + weight + 1
+                    ):
+                        distance_dict[connection] = d + weight + 1
+                        parent[connection] = node
+                        pq.put(
+                            (
+                                distance_dict[connection],
+                                connection,
+                                initial_autonomy - weight,
+                            )
+                        )
 
     if not path_found:
         return None, None

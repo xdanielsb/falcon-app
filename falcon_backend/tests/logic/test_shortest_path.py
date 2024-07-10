@@ -20,8 +20,24 @@ def setup_galaxy() -> GraphDescType:
         2: [(4, 3), (1, 1)],
         3: [(4, 4), (1, 3)],
         4: [(5, 4), (2, 3), (3, 4)],
-        5: [(4, 3)],
+        5: [(4, 4)],
     }
+
+    """ testing graph :v 
+          1
+       //   \\
+    w(1)   w(2)
+     //      \\
+     2         3 
+      \\      //  
+       w(3)  w(4) 
+         \\ //
+           4 
+           ||
+          w(4)
+           ||
+           5
+    """
 
     return planets, adj_list
 
@@ -97,3 +113,23 @@ def test_path_in_both_directions_should_result_in_the_same_weight(
 
     assert actual_dis_one[planets["planet4"]] == actual_dis_two[planets["planet1"]]
     assert sorted(path_one) == sorted(path_two)
+
+
+def test_take_less_optimal_path_edge_weight_greater_than_autonomy(
+    setup_galaxy: GraphDescType,
+):
+    planets, _ = setup_galaxy
+    adj_list = {
+        1: [(2, 1), (3, 2)],
+        2: [
+            (4, 5),
+            (1, 1),
+        ],  # 2 -> 4 is 5 so that the autonomy cannot pass for this edge
+        3: [(4, 4), (1, 3)],
+        4: [(5, 4), (2, 5), (3, 4)],
+        5: [(4, 4)],
+    }
+    actual_dis, actual_path = get_shortest_path_with_autonomy(
+        planets["planet1"], planets["planet5"], adj_list, 4
+    )
+    assert actual_dis[planets["planet5"]] == 10 + 2  # stop in node 3 and 4 to refuel

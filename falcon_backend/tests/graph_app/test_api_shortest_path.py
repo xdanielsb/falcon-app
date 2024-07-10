@@ -17,23 +17,25 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         self.node2 = Node.objects.create(pk=2, name="Node B")
         self.node3 = Node.objects.create(pk=3, name="Node C")
 
-        Edge.objects.create(source=self.node1, target=self.node2, weight=3)
-        Edge.objects.create(source=self.node2, target=self.node3, weight=4)
-        Edge.objects.create(source=self.node3, target=self.node1, weight=2)
+        self.edge1 = Edge.objects.create(source=self.node1, target=self.node2, weight=3)
+        self.edge2 = Edge.objects.create(source=self.node2, target=self.node3, weight=4)
+        self.edge3 = Edge.objects.create(source=self.node3, target=self.node1, weight=2)
 
         empire = Empire.objects.create(countdown=10)
-        bounty_hunter = BountyHunter.objects.create(day=1, planet="Marz")
-        empire.bounty_hunters.add(bounty_hunter)
+        self.bounty_hunter_1 = BountyHunter.objects.create(day=1, planet="Node A")
+        self.bounty_hunter_2 = BountyHunter.objects.create(day=1, planet="Node B")
+        empire.bounty_hunters.add(self.bounty_hunter_1)
+        empire.bounty_hunters.add(self.bounty_hunter_2)
 
     @override_settings(DEBUG=True)
     def test_shortest_path_valid_with_autonomy(self):
-        data = {"sourceId": self.node1.pk, "targetId": self.node3.pk, "autonomy": 10}
+        data = {"sourceId": self.node1.pk, "targetId": self.node3.pk, "autonomy": 100}
         response = self.client.post(reverse("shortest-path"), data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn("distances", response.json())
-        self.assertIn("path", response.json())
-        self.assertIn("probability", response.json())
+        res = response.json()
+        assert res["distances"][str(self.node3.pk)] == 2
+        assert sorted(res["path"]) == [self.node1.pk, self.node3.pk]
 
     @override_settings(DEBUG=True)
     def test_shortest_path_valid_without_autonomy(self):
@@ -57,3 +59,13 @@ class TestShortestPathView(APITestCase, URLPatternsTestCase):
         response = self.client.post(reverse("shortest-path"), data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    @override_settings(DEBUG=True)
+    def test_autonomy_is_lower_than_minimun_distance(self):
+        data = {"sourceId": self.node1.pk, "targetId": self.node3.pk, "autonomy": 0}
+        response = self.client.post(reverse("shortest-path"), data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.json(), {"distances": None, "path": None, "probability": 0}
+        )

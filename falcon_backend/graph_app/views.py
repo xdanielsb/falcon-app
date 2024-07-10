@@ -35,8 +35,17 @@ class ShortestPathView(views.APIView):
             source.pk, target.pk, graph_to_adj_list(Edge.objects.all()), autonomy
         )
         empire = Empire.objects.first()
+        bounty_hunters_with_node_ids = []
+
+        for bounty in empire.bounty_hunters.all():
+            node = Node.objects.filter(name=bounty.planet).first()
+            if node:
+                bounty_hunters_with_node_ids.append(
+                    {"day": bounty.day, "node_id": node.pk}
+                )
+
         probability_arriving = compute_probability_arrival(
-            target.pk, (dis, autonomy), empire
+            target.pk, (dis, path), empire.countdown, bounty_hunters_with_node_ids
         )
         return JsonResponse(
             {"distances": dis, "path": path, "probability": probability_arriving}

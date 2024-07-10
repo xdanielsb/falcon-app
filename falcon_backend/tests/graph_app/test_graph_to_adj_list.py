@@ -20,7 +20,8 @@ class TestGraphToAdjList(TestCase):
 
         edges = Edge.objects.all()
         adj_lists = graph_to_adj_list(edges)
-        expected = {1: [(2, 3), (1, 3)], 2: [(3, 4), (2, 4)], 3: [(1, 2), (3, 2)]}
+        expected = {1: [(2, 3), (3, 2)], 2: [(1, 3), (3, 4)], 3: [(2, 4), (1, 2)]}
+
         self.assertEqual(adj_lists, expected)
 
     def test_transform_when_no_edges(self):
