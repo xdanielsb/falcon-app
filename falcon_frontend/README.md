@@ -3,6 +3,7 @@
 ### Run the application
 
 ```
+ $ npm install
  $ npx nx serve falcon_frontend
 ```
 

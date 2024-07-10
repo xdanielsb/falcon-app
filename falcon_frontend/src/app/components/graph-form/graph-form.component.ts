@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { AppForm } from '../../utils/form';
-import { GraphMetadataForm } from '../../models/graph';
+import { Graph, GraphMetadataForm } from '../../models/graph';
 
 @Component({
   selector: 'app-graph-form',
@@ -34,7 +34,7 @@ export class GraphFormComponent {
   }) as AppForm<GraphMetadataForm>;
 
   @Output() computeOddsEvent = new EventEmitter<GraphMetadataForm>();
-  @Input() graph!: any;
+  @Input({ required: true }) graph!: Graph;
   constructor(private fb: FormBuilder) {}
 
   computeOdds(): void {

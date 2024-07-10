@@ -1,0 +1,53 @@
+<ngx-graph
+  *ngIf="graph && graph.nodes.length > 0 && graph.edges.length > 0"
+  class="chart-container"
+  [links]="graph.edges"
+  [layout]="'dagre'"
+  [showMiniMap]="true"
+  [animate]="true"
+  [autoZoom]="true"
+  [nodes]="graph.nodes"
+  [autoCenter]="true"
+  [update$]="update$"
+  [zoomToFit$]="zoomToFit$"
+>
+  <ng-template #linkTemplate let-link>
+    <svg:g class="edge">
+      <svg:path
+        class="line"
+        stroke-width="2"
+        marker-end="url(#arrow)"
+      ></svg:path>
+      <svg:text class="edge-label">
+        <textPath
+          class="text-path"
+          [attr.href]="'#' + link.id"
+          [attr.fill]="'black'"
+          [style.dominant-baseline]="link.dominantBaseline"
+          startOffset="50%"
+        >
+          {{ link.label }}
+        </textPath>
+      </svg:text>
+    </svg:g>
+  </ng-template>
+
+  <ng-template #nodeTemplate let-node>
+    <svg:g class="node">
+      <svg:circle
+        [attr.cx]="node.dimension.width / 2"
+        [attr.cy]="node.dimension.height / 2"
+        [attr.r]="node.dimension.width / 2"
+        [attr.fill]="node.data.color"
+      />
+      <svg:text
+        alignment-baseline="central"
+        [attr.x]="10"
+        [attr.y]="node.dimension.height / 2"
+        [attr.fill]="node.data.selected ? 'white' : 'dark'"
+      >
+        {{ node.label }}
+      </svg:text>
+    </svg:g>
+  </ng-template>
+</ngx-graph>

@@ -1,0 +1,24 @@
+app-graph-preview {
+  flex: 1;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-drawer {
+  padding: 10px 20px;
+  background: rgba(182, 217, 234, 0.93);
+}
+
+mat-drawer-content {
+  display: flex;
+  flex-direction: row;
+  padding: 40px 40px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}

@@ -8,8 +8,10 @@ import {
 import { GraphFormComponent } from '../../components/graph-form/graph-form.component';
 import { GraphSettingsComponent } from '../../components/graph-settings/graph-settings.component';
 import { GraphService } from '../../services/graph.service';
-import { GraphMetadataForm } from '../../models/graph';
+import { Graph, GraphMetadataForm } from '../../models/graph';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { GraphPreviewComponent } from '../../components/graph-preview/graph-preview.component';
 
 @Component({
   standalone: true,
@@ -21,19 +23,19 @@ import { TranslateModule } from '@ngx-translate/core';
     GraphFormComponent,
     GraphSettingsComponent,
     TranslateModule,
+    GraphPreviewComponent,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  graph$ = this.graphService.getGraph();
-  graph: any;
+  graph$: Observable<Graph> = this.graphService.getGraph();
+  graph: Graph | null = null;
   odds: number | null = null;
   constructor(private graphService: GraphService) {
     this.graph$.subscribe((graph) => {
       this.graph = graph;
-      console.log(graph);
     });
   }
 
