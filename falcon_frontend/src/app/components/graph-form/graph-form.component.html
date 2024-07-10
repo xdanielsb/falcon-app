@@ -39,6 +39,6 @@
 
 @if (odds !== null) {
   <div class="odds">
-    {{ 'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate: { odds: odds } }}
+    {{ 'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate}} {{odds | percent}}
   </div>
 }

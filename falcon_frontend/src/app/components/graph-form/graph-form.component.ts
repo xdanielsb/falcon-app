@@ -6,7 +6,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, PercentPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -45,6 +45,8 @@ export class GraphFormComponent implements OnChanges {
   @Input({ required: true }) graph!: Graph;
   @Input({ required: true }) odds!: number | null;
   @Input({ required: true }) graphInfo: GraphInfo | null = null;
+
+
   constructor(private fb: FormBuilder) {}
 
   computeOdds(): void {
