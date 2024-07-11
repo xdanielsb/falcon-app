@@ -1,4 +1,5 @@
 /* eslint-disable */
+const esModules = ['delaunator', 'robust-predicates', 'internmap'].join('|');
 export default {
   displayName: 'falcon_frontend',
   preset: './jest.preset.js',
@@ -13,7 +14,7 @@ export default {
       },
     ],
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  transformIgnorePatterns: [`node_modules/(?!.*\\.mjs$|${esModules}|d3-\\w+)`],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

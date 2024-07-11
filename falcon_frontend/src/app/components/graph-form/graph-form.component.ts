@@ -44,7 +44,7 @@ export class GraphFormComponent implements OnChanges {
   }) as AppForm<GraphMetadataForm>;
 
   @Output() computeOddsEvent = new EventEmitter<GraphMetadataForm>();
-  @Input({ required: true }) graph!: Graph;
+  @Input({ required: true }) graph: Graph = { nodes: [], edges: [] };
   @Input({ required: true }) odds!: number | null;
   @Input({ required: true }) graphInfo: GraphInfo | null = null;
   @Input({ required: true }) loading!: boolean;
