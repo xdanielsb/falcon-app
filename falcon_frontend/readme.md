@@ -22,6 +22,11 @@
  $ npx nx test falcon_frontend
 ```
 
+### run e2e tests
+```sh
+    $ npx nx e2e e2e
+```
+
 ## Build for production
 
 ```
@@ -33,3 +38,5 @@
 ```
  $ npx nx dep-graph
 ```
+
+
