@@ -34,6 +34,11 @@ def compute_odds(millennium_config: str, empire_config: str):
 
 
 class Command(BaseCommand):
+    """
+    Customer command to run the odds,  it receives the path to the millennium falcon configuration and the empire configuration
+    instructions in the readme to run the command
+    """
+
     help = (
         "Compute the odds of the millennium falcon arriving to the target destination"
     )

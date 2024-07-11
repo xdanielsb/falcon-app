@@ -3,6 +3,9 @@ from dataclasses import dataclass, field
 from marshmallow import Schema, post_load, fields
 
 
+# dataclasses for the empire
+
+
 @dataclass
 class BountyHunterWithPlanetId:
     day: int
@@ -19,6 +22,9 @@ class BountyHunterDC:
 class EmpireDC:
     countdown: int
     bounty_hunters: list[BountyHunterDC] = field(default_factory=list)
+
+
+# validation schemas
 
 
 class BountyHunterSchema(Schema):

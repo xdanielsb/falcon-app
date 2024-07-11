@@ -47,8 +47,8 @@ def get_find_path_with_autonomy(
     distance_dict = {source: 0}
     # parent of each node, helps to rebuild the path
     parent = {}
-    # store the nodes ids where stops to refuel
-    stops = []
+    # store the nodes ids where the vehicle stops to refuel
+    node_ids_of_refuel = []
     # whether the paint is reach
     path_found = False
     # number of times it had to refuel
@@ -99,7 +99,7 @@ def get_find_path_with_autonomy(
                             )
                         )
                         # the stop is in the current node not in the connection
-                        stops.append(node)
+                        node_ids_of_refuel.append(node)
 
     if not path_found:
         return None, None, []
@@ -113,5 +113,5 @@ def get_find_path_with_autonomy(
 
     # only return the dis of nodes in path
     distance_dict = {key: value for key, value in distance_dict.items() if key in path}
-    stops = [stop for stop in stops if stop in path]
-    return distance_dict, path, stops
+    node_ids_of_refuel = [stop for stop in node_ids_of_refuel if stop in path]
+    return distance_dict, path, node_ids_of_refuel

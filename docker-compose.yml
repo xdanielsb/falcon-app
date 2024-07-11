@@ -11,7 +11,7 @@ services:
       timeout: 10s
       retries: 3
 
-  frontend:
+  frontend-y:
     build:
       context: ./falcon_frontend
       dockerfile: Dockerfile

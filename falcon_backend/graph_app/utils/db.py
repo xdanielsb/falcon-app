@@ -57,6 +57,9 @@ def load_nodes_and_edges(metadata_path: str) -> None:
 
 
 def load_graph_metadata(metadata_path: str) -> None:
+    """
+    load the metadata of the graph, each time clean the previous data:w
+    """
     metadata = load_metadata(metadata_path)
     source = get_or_create_node(metadata.departure)
     target = get_or_create_node(metadata.arrival)

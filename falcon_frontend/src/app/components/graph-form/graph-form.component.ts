@@ -51,6 +51,7 @@ export class GraphFormComponent implements OnChanges {
 
   constructor(private fb: FormBuilder) {}
 
+  /** emit events that compute the odds */
   computeOdds(): void {
     if (this.form.value) {
       this.computeOddsEvent.emit(this.form.value as GraphMetadataForm);

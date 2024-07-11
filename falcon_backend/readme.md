@@ -1,12 +1,12 @@
 ## Falcon backend
 
+![falcon](./img.png)
+
 ### Run
 ```sh
  $ docker build --no-cache -t falcon-backend .
  $ docker run -p 8000:8000 falcon-backend
 ```
-
-Once this is done you can go to http://localhost:8000/graph/ and see the api :).
 
 ## Setup for development
 
@@ -19,15 +19,17 @@ The initial configuration is in the .env file
 
 ### Create a virtualenv
 ```sh
+  $ pyenv install 3.12
   $ pyenv virtualenv 3.12 falcon-env 
   $ pyenv activate falcon-env
-  $ pip3 install -r requirements-dev.txt --no-cache-dir
+  $ pip3 install -r requirements.txt --no-cache-dir
   $ # load the initial configuration (read the .env file and create the data on the db)
   $ python manage.py runscript init_db
 ```
 
-### Run the cli to compute the odds
+### Run the CLI to compute the odds
 ```sh
+ # to run this you should create the virtual env
  $ python manage.py give_me_the_odds ./tests/cases/case4/millennium-falcon.json ./tests/cases/case4/empire.json  
 ```
 
@@ -42,4 +44,10 @@ $ python manage.py runserver
 $ pytest
 # rest api/utils/graph tests 
 $ python manage.py test
+```
+
+
+#### Run pre-commit
+```sh
+ $ pre-commit run -a   
 ```

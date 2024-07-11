@@ -2,11 +2,14 @@
   <h2>{{ 'GRAPH_MANAGEMENT.TITLE' | translate }}</h2>
 
   <mat-form-field>
-    <mat-select [value]="language.value" (valueChange)="selectLanguage($event)">
+    <mat-select
+      [value]="selectedLanguage.value"
+      (valueChange)="selectLanguage($event)"
+    >
       <mat-select-trigger>
         <div class="trigger">
-          <img [src]="language.img" class="flag" alt="" />
-          <span>{{ language.label | translate }}</span>
+          <img [src]="selectedLanguage.img" class="flag" alt="" />
+          <span>{{ selectedLanguage.label | translate }}</span>
         </div>
       </mat-select-trigger>
       <mat-option
@@ -59,7 +62,7 @@
     <span>
       {{ 'GRAPH_MANAGEMENT.METRIC_BEAT_LOGS' | translate }}
     </span>
-    <mat-icon [matTooltip]="'GRAPH_MANAGEMENT.METRCI_LOGS.TOOLTIP' | translate"
+    <mat-icon [matTooltip]="'GRAPH_MANAGEMENT.METRIC_LOGS.TOOLTIP' | translate"
       >info</mat-icon
     >
   </a>

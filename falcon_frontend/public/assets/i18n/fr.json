@@ -1,15 +1,23 @@
 {
-  "GRAPH_MANAGEMENT.TITLE": "Graph Management",
-  "GRAPH_MANAGEMENT.DEPARTURE": "Departure",
-  "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Select a route",
-  "GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE": "Odds to arrive: {{odds}}",
-  "GRAPH_MANAGEMENT.DESTINATION": "Destination",
-  "GRAPH_MANAGEMENT.AUTONOMY": "Autonomy",
-  "GRAPH_MANAGEMENT.COMPUTE_ODDS": "Compute odds",
-
-  "GRAPH_MANAGEMENT.NUMBER_OF_NODES": "Number of nodes",
-  "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Number of nodes",
-  "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Number of hunters",
-
-  "GRAPH_MANAGEMENT.INFO": "Graph information"
+  "GRAPH_MANAGEMENT.TITLE": "Paramètres",
+  "GRAPH_MANAGEMENT.DEPARTURE": "Point de départ",
+  "GRAPH_MANAGEMENT.DESTINATION": "Point de destination",
+  "GRAPH_MANAGEMENT.AUTONOMY": "Autonomie du véhicule",
+  "GRAPH_MANAGEMENT.COMPUTE_ODDS": "Calculer les probabilités",
+  "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Sélectionner un itinéraire",
+  "GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE": "Probabilité d'arriver :",
+  "GRAPH_MANAGEMENT.NUMBER_OF_NODES": "Nombre total de nœuds",
+  "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Nombre total de liens",
+  "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Nombre total de chasseurs",
+  "GRAPH_MANAGEMENT.COUNTDOWN": "Compte à rebours",
+  "GRAPH_MANAGEMENT.INFO": "Informations sur le graphe",
+  "GRAPH_MANAGEMENT.ADMINISTRATION": "Administration du graphe",
+  "GRAPH_MANAGEMENT.API": "Accès API",
+  "GRAPH_MANAGEMENT.LANGUAGE.ENGLISH": "Anglais",
+  "GRAPH_MANAGEMENT.LANGUAGE.FRENCH": "Français",
+  "GRAPH_MANAGEMENT.LANGUAGE.SPANISH": "Espagnol",
+  "GRAPH_MANAGEMENT.KIBANA_LOGS": "Journaux d'application Falcon",
+  "GRAPH_MANAGEMENT.METRIC_BEAT_LOGS": "Journaux de métriques Falcon",
+  "GRAPH_MANAGEMENT.KIBANA_LOGS.TOOLTIP": "Pour utiliser cette option, démarrez l'application avec la surveillance activée. Plus d'informations sont disponibles dans le fichier README.md principal.",
+  "GRAPH_MANAGEMENT.METRIC_LOGS.TOOLTIP": "Pour utiliser cette option, démarrez l'application avec la surveillance activée. Plus d'informations sont disponibles dans le fichier README.md principal."
 }

@@ -55,10 +55,13 @@ export class AppComponent {
     private graphService: GraphService,
     private store$: Store<GlobalState>,
   ) {
+    // dispatch the action to get the graph
     this.store$.dispatch(GraphActions.getGraph());
+    // subscribe to the loading state
     this.store$
       .pipe(select(GraphSelectors.isLoadingSelector))
       .subscribe((loading) => (this.loading = loading));
+    // subscribe to the graph state
     this.store$
       .pipe(
         select(GraphSelectors.graphSelector),
@@ -67,6 +70,9 @@ export class AppComponent {
         }),
       )
       .subscribe();
+    // subscribe to the odds path state, the odds as well return the path
+    // when is returned the nodes in the path are marked as selected
+    // this help to change its color to white
     this.store$
       .pipe(
         select(GraphSelectors.findPathSelector),
@@ -78,7 +84,7 @@ export class AppComponent {
                 ...node,
                 data: {
                   ...node.data,
-                  selected: res.path.includes(Number(node.id)),
+                  selected: res.path? res.path.includes(Number(node.id)): false,
                 },
               };
             });
@@ -87,7 +93,8 @@ export class AppComponent {
         }),
       )
       .subscribe();
-
+    // this is the initial info of the graph loaded from the .json file
+    // stored in the db
     this.store$
       .pipe(
         select(GraphSelectors.graphInfoSelector),
@@ -98,12 +105,14 @@ export class AppComponent {
       .subscribe();
   }
 
+  /** dispatch the action to get the odds and path */
   computeOdds(input: GraphMetadataForm) {
-    const params = {
-      sourceId: Number(input.sourceId),
-      targetId: Number(input.targetId),
-      autonomy: Number(input.autonomy),
-    };
-    this.store$.dispatch(GraphActions.getOddsPath(params));
+    this.store$.dispatch(
+      GraphActions.getOddsPath({
+        sourceId: Number(input.sourceId),
+        targetId: Number(input.targetId),
+        autonomy: Number(input.autonomy),
+      }),
+    );
   }
 }

@@ -29,10 +29,15 @@ def find_best_path_heuristic(
     iterations=5,
 ) -> "FindPathReturnType":
     """
-    Since from source node to target node can be infinite path, I implemented a heuristic algorithm, the idea
-    is to find the best path using djikstra algorithm, but in each iteration, I will modify one edge to infinity
-    of that best path so that the algorithm will find another path, and I will keep the best path found until
-    the end of the iterations
+    Finds the best path (distance, stops, probability of arrival) considering limited
+    autonomy, bounty hunters, and refueling needs.
+
+    This function implements a heuristic approach to handle potentially infinite paths.
+    meaning that will not assure to arrive to a global maximum, but it will try to find a good path ^^
+    It iteratively utilizes a variation of Dijkstra's algorithm. In each iteration,
+    a random non-source and non-target node from the current best path is disabled,
+    forcing the algorithm to explore alternative routes. The function tracks the
+    best path found so far based on probability.
     """
     best_path = None
     best_stops = []

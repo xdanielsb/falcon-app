@@ -12,6 +12,9 @@ from graph_app.utils.graph import graph_to_adj_list
 from logic.best_path_heuristic import find_best_path_heuristic
 
 
+# endpoints logic
+
+
 @api_view(["GET"])
 def graph_view(request):
     """

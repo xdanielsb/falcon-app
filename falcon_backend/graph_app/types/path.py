@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 from marshmallow import Schema, fields, post_load
 
+# dataclasses for the path, it is useful to validate the input files
+
 
 @dataclass
 class PathInfo:

@@ -11,9 +11,9 @@ class TestCases(TestCase):
     def test_case(self):
         for case in range(1, 5):
             with self.subTest(case=case):
-                prob = compute_odds(
+                computed_odd = compute_odds(
                     f"./tests/cases/case{case}/millennium-falcon.json",
                     f"./tests/cases/case{case}/empire.json",
                 )
-                ans = read_json_file(f"./tests/cases/case{case}/answer.json")
-                assert prob == ans["odds"]
+                answer_file = read_json_file(f"./tests/cases/case{case}/answer.json")
+                assert computed_odd == answer_file["odds"]

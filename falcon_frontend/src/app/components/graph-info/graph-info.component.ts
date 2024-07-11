@@ -45,6 +45,13 @@ export class GraphInfoComponent implements OnChanges {
   constructor(private translateService: TranslateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if ('graphInfo' in changes) {
+      this.buildDataSource();
+    }
+  }
+
+  /** Build the data source for the table **/
+  private buildDataSource(): void {
     this.graphDataSource.data = [
       {
         label: this.translateService.instant(

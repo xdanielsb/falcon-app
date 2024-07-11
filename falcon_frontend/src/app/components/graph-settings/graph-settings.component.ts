@@ -11,6 +11,7 @@ import {
   MatSelect,
   MatSelectModule,
 } from '@angular/material/select';
+import { Language } from '../../utils/language';
 
 @Component({
   selector: 'app-graph-settings',
@@ -32,7 +33,7 @@ import {
   styleUrl: './graph-settings.component.scss',
 })
 export class GraphSettingsComponent {
-  readonly languages = [
+  readonly languages: Language[] = [
     {
       value: 'en',
       label: 'GRAPH_MANAGEMENT.LANGUAGE.ENGLISH',
@@ -49,16 +50,19 @@ export class GraphSettingsComponent {
       img: 'assets/countries/es.png',
     },
   ];
-  language = this.languages[0];
+  selectedLanguage: Language = this.languages[0];
 
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use('en');
   }
 
+  /** Update the translations accordingly
+   *  @param code the language code
+   * **/
   selectLanguage(code: string): void {
     this.translate.use(code);
-    this.language =
-      this.languages.find((lang) => lang.value === code) || this.languages[0];
+    this.selectedLanguage =
+      this.languages.find(({ value }) => value === code) || this.languages[0];
   }
 }

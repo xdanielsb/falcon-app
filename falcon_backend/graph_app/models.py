@@ -25,6 +25,8 @@ class Edge(models.Model):
 
 
 class GraphMetadata(models.Model):
+    """Store the initial metadata of the graph contained in the json file"""
+
     source = models.ForeignKey(
         Node, on_delete=models.CASCADE, related_name="departure_node"
     )

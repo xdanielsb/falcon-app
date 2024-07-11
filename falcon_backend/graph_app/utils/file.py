@@ -20,11 +20,8 @@ def read_json_file(file_path) -> Any:
             return json.load(file)
     except FileNotFoundError:
         get_logger().error(f"The file at {file_path} was not found.")
-        print(f"The file at {file_path} was not found.")
     except json.JSONDecodeError:
         get_logger().error(f"The file at {file_path} does not contain valid JSON.")
-        print(f"The file at {file_path} does not contain valid JSON.")
     except Exception as e:
         get_logger().error(f"An error occurred: {e}")
-        print(f"An error occurred: {e}")
     return None
