@@ -8,6 +8,7 @@
   "GRAPH_MANAGEMENT.COMPUTE_ODDS": "Calculate Odds",
   "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Select a Route",
   "GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE": "Probability to Arrive:",
+  "GRAPH_MANAGEMENT.DISTANCE": "Time to arrive: {{time}} time units",
   "GRAPH_MANAGEMENT.NUMBER_OF_NODES": "Total Nodes",
   "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Total Edges",
   "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Total Hunters",

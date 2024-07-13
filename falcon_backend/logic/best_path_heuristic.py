@@ -24,8 +24,8 @@ def find_best_path_heuristic(
     target: int,
     adj_lists: "AdjListType",
     initial_autonomy: int,
-    countdown: int,
-    bounty_hunters: list[BountyHunterWithPlanetId],
+    countdown: int | None,
+    bounty_hunters: list[BountyHunterWithPlanetId] | None,
     iterations=5,
 ) -> "FindPathReturnType":
     """
@@ -57,10 +57,11 @@ def find_best_path_heuristic(
         probability_arriving = compute_probability_arrival(
             target,
             (distance_dict, path),
-            countdown,
-            bounty_hunters,
+            countdown if countdown is not None else 1e9,
+            bounty_hunters or [],
             node_ids_refuel,
         )
+
         if probability_arriving > best_probability:
             best_probability = probability_arriving
             best_path = path

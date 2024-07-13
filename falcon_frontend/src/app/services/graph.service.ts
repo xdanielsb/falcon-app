@@ -32,7 +32,8 @@ export class GraphService {
   computeOdds(input: GraphMetadataForm): Observable<GraphPath> {
     return this.http.post<GraphPath>(ApiUrls.FindPathUrl, {
       ...input,
-      autonomy: Number.parseInt(<string>input.autonomy || '0'),
+      countdown: input.countdown === null ? null : Number(input.countdown),
+      autonomy: input.autonomy === null ? null : Number(input.autonomy),
     });
   }
 

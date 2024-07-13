@@ -65,16 +65,6 @@ export class GraphInfoComponent implements OnChanges {
         ),
         value: this.graphInfo?.numberOfEdges,
       },
-      {
-        label: this.translateService.instant(
-          'GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS',
-        ),
-        value: this.graphInfo?.hunters.length,
-      },
-      {
-        label: this.translateService.instant('GRAPH_MANAGEMENT.COUNTDOWN'),
-        value: this.graphInfo?.countDown,
-      },
     ];
   }
 }

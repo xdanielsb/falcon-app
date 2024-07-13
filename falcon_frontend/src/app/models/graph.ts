@@ -3,9 +3,10 @@ import { NodeResponse, parseResponseNode } from './node';
 import { Edge, Node } from '@swimlane/ngx-graph';
 
 export interface GraphMetadataForm {
-  sourceId: string | number | null;
-  targetId: string | number | null;
-  autonomy: string | number | null;
+  sourceId: number;
+  targetId: number;
+  autonomy: number | null;
+  countdown: number | null;
 }
 
 export interface GraphResponse {
