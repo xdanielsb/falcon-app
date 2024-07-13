@@ -1,6 +1,8 @@
 {
   "GRAPH_MANAGEMENT.TITLE": "Settings",
+  "GRAPH_MANAGEMENT.OPTIONS": "Options",
   "GRAPH_MANAGEMENT.DEPARTURE": "Departure Point",
+  "GRAPH_MANAGEMENT.CREATE_RANDOM_GRAPH": "Create random graph",
   "GRAPH_MANAGEMENT.DESTINATION": "Destination Point",
   "GRAPH_MANAGEMENT.AUTONOMY": "Vehicle Autonomy",
   "GRAPH_MANAGEMENT.COMPUTE_ODDS": "Calculate Odds",

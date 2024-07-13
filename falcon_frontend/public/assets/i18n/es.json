@@ -7,6 +7,8 @@
   "GRAPH_MANAGEMENT.SELECT_A_ROUTE": "Seleccionar una ruta",
   "GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE": "Probabilidad de llegar:",
   "GRAPH_MANAGEMENT.NUMBER_OF_NODES": "Número total de nodos",
+  "GRAPH_MANAGEMENT.OPTIONS": "Options",
+  "GRAPH_MANAGEMENT.CREATE_RANDOM_GRAPH": "Create random graph",
   "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Número total de enlaces",
   "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Número total de cazadores",
   "GRAPH_MANAGEMENT.COUNTDOWN": "Cuenta regresiva",

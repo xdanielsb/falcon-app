@@ -37,3 +37,9 @@ export const getGraphInfoFailure = createAction(
   '[Graph] Get graph info failure',
   props<{ error: string }>(),
 );
+
+// create graph
+export const createGraph = createAction(
+  '[Graph] Create graph',
+  props<{ random: boolean }>(),
+);

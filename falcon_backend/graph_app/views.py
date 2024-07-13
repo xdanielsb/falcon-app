@@ -8,7 +8,8 @@ from falcon_backend.logger import get_logger
 from graph_app.models import Node, Edge, Empire, GraphMetadata, BountyHunter
 from graph_app.serializers import NodeSerializer, EdgeSerializer, BountyHunterSerializer
 from graph_app.types.empire import BountyHunterWithPlanetId
-from graph_app.utils.graph import graph_to_adj_list
+from graph_app.utils.db import load_initial_db, load_empire_info
+from graph_app.utils.graph import graph_to_adj_list, create_random_graph
 from logic.best_path_heuristic import find_best_path_heuristic
 
 
@@ -78,3 +79,22 @@ class GraphInfoView(views.APIView):
                 "autonomy": graph_info.autonomy,
             }
         )
+
+
+class CreateGraphView(views.APIView):
+    def post(self, request):
+        rand = request.data["random"]
+        if rand:
+            get_logger().info("Creating random graph")
+            create_random_graph()
+        else:
+            get_logger().info("Restarting initial graph")
+            load_initial_db()
+            load_empire_info()
+        nodes = Node.objects.all()
+        edges = Edge.objects.all()
+
+        node_serializer = NodeSerializer(nodes, many=True, context={"request": request})
+        edge_serializer = EdgeSerializer(edges, many=True, context={"request": request})
+
+        return Response({"nodes": node_serializer.data, "edges": edge_serializer.data})
