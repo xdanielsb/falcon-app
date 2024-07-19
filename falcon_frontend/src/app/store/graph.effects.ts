@@ -74,6 +74,29 @@ export class GraphEffects {
     ),
   );
 
+  createGraph$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GraphActions.createGraph),
+      switchMap((action) => {
+        return this.graphService.createGraph(action.random).pipe(
+          map((graph: Graph) =>
+            GraphActions.getGraphSuccess({
+              nodes: graph.nodes,
+              edges: graph.edges,
+            }),
+          ),
+          tap(() => {}),
+          catchError((error) =>
+            of(GraphActions.getGraphFailure({ error: error.message })),
+          ),
+        );
+      }),
+      tap(() => {
+        this.store$.dispatch(GraphActions.getGraphInfo());
+      }),
+    ),
+  );
+
   constructor(
     private actions$: Actions,
     private store$: Store,

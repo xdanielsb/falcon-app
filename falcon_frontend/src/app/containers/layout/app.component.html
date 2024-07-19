@@ -1,6 +1,7 @@
 <mat-drawer-container>
   <mat-drawer mode="side" opened #drawer>
     <app-graph-settings />
+    <app-graph-options (createRandomGraphEvent)="createRandomGraph()" />
   </mat-drawer>
   <mat-drawer-content>
     <button class="toggle-button" mat-mini-fab (click)="drawer.toggle()">

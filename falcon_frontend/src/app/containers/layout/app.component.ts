@@ -25,6 +25,7 @@ import { GraphInfoComponent } from '../../components/graph-info/graph-info.compo
 import { GraphInfo } from '../../models/graph-info';
 import { MatIcon } from '@angular/material/icon';
 import { MatMiniFabButton } from '@angular/material/button';
+import { GraphOptionsComponent } from '../../components/graph-options/graph-options.component';
 
 @Component({
   standalone: true,
@@ -40,6 +41,7 @@ import { MatMiniFabButton } from '@angular/material/button';
     GraphInfoComponent,
     MatIcon,
     MatMiniFabButton,
+    GraphOptionsComponent,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -84,7 +86,9 @@ export class AppComponent {
                 ...node,
                 data: {
                   ...node.data,
-                  selected: res.path? res.path.includes(Number(node.id)): false,
+                  selected: res.path
+                    ? res.path.includes(Number(node.id))
+                    : false,
                 },
               };
             });
@@ -114,5 +118,10 @@ export class AppComponent {
         autonomy: Number(input.autonomy),
       }),
     );
+  }
+
+  /** dispatch the action to get the graph */
+  createRandomGraph() {
+    this.store$.dispatch(GraphActions.createGraph({ random: true }));
   }
 }

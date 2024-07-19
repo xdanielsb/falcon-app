@@ -40,4 +40,14 @@ export class GraphService {
   getGraphInfo(): Observable<GraphInfo> {
     return this.http.get<GraphInfo>(ApiUrls.GraphInfoUrl);
   }
+
+  /** This method creates a new graph
+   * @param random if true the graph will be random otherwise
+   * it will be the default graph;
+   * */
+  createGraph(random: boolean): Observable<Graph> {
+    return this.http
+      .post<GraphResponse>(ApiUrls.CreateGraphUrl, { random })
+      .pipe(map((response) => parseGraph(response)));
+  }
 }
