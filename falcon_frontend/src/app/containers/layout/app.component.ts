@@ -52,6 +52,7 @@ export class AppComponent {
   graph: Graph | null = null;
   graphInfo: GraphInfo | null = null;
   odds: number | null = null;
+  minDistance: number | null = null;
 
   constructor(
     private graphService: GraphService,
@@ -81,6 +82,7 @@ export class AppComponent {
         tap((res: GraphPath | null) => {
           if (this.graph && res) {
             this.odds = res.probability;
+            this.minDistance = Math.max(...Object.values(res.distances));
             const nodes: Node[] = (this.graph?.nodes || []).map((node) => {
               return {
                 ...node,
@@ -115,7 +117,8 @@ export class AppComponent {
       GraphActions.getOddsPath({
         sourceId: Number(input.sourceId),
         targetId: Number(input.targetId),
-        autonomy: Number(input.autonomy),
+        autonomy: input.autonomy,
+        countdown: input.countdown,
       }),
     );
   }

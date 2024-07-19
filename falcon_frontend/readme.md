@@ -14,7 +14,7 @@ The left menu corresponds to settings. Graph information is displayed on the rig
 
 ```
  $ npm install
- # use a version of node greater than 18 otherwise it may file
+ # use a version of node greater than 18 otherwise it may fail
  # I use nvm v18.19
  $ npx nx serve falcon_frontend
 ```

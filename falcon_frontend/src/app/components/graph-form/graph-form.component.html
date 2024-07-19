@@ -5,7 +5,7 @@
       <mat-label>{{ 'GRAPH_MANAGEMENT.DEPARTURE' | translate }}</mat-label>
       <mat-select formControlName="sourceId">
         @for (node of graph.nodes || []; track node) {
-          <mat-option [value]="node.id + ''">{{ node.label }}</mat-option>
+          <mat-option [value]="Number(node.id)">{{ node.label }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -14,7 +14,7 @@
       <mat-label>{{ 'GRAPH_MANAGEMENT.DESTINATION' | translate }}</mat-label>
       <mat-select formControlName="targetId">
         @for (node of graph.nodes || []; track node) {
-          <mat-option [value]="node.id">{{ node.label }}</mat-option>
+          <mat-option [value]="Number(node.id)">{{ node.label }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -22,6 +22,11 @@
     <mat-form-field>
       <mat-label>{{ 'GRAPH_MANAGEMENT.AUTONOMY' | translate }}</mat-label>
       <input matInput formControlName="autonomy" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'GRAPH_MANAGEMENT.COUNTDOWN' | translate }}</mat-label>
+      <input matInput formControlName="countdown" />
     </mat-form-field>
   </form>
 </section>
@@ -41,6 +46,13 @@
   <div class="odds">
     {{ 'GRAPH_MANAGEMENT.PROBABILITY_TO_ARRIVE' | translate }}
     {{ loading ? '-' : (odds | percent) }}
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  </div>
+}
+
+@if (minDistance !== null) {
+  <div class="odds">
+    {{ 'GRAPH_MANAGEMENT.DISTANCE' | translate: { time: minDistance } }}
     <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
   </div>
 }

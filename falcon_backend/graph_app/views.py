@@ -35,6 +35,7 @@ class FindPathView(views.APIView):
         source = get_object_or_404(Node, pk=request.data["sourceId"])
         target = get_object_or_404(Node, pk=request.data["targetId"])
         autonomy = request.data.get("autonomy", None)
+        countdown = request.data.get("countdown", None)
 
         empire = Empire.objects.first()
         bounty_hunters_with_node_ids = []
@@ -51,7 +52,7 @@ class FindPathView(views.APIView):
             target.pk,
             graph_to_adj_list(Edge.objects.all()),
             autonomy,
-            empire.countdown,
+            countdown,
             bounty_hunters_with_node_ids,
         )
         get_logger().info(f"Probability computed: {probability_arriving}")

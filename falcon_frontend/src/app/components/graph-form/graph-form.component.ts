@@ -41,11 +41,13 @@ export class GraphFormComponent implements OnChanges {
     sourceId: [null, Validators.required],
     targetId: [null, Validators.required],
     autonomy: [5, Validators.min(0)],
-  }) as AppForm<GraphMetadataForm>;
+    countdown: [null, Validators.min(0)],
+  }) as unknown as AppForm<GraphMetadataForm>;
 
   @Output() computeOddsEvent = new EventEmitter<GraphMetadataForm>();
   @Input({ required: true }) graph: Graph = { nodes: [], edges: [] };
   @Input({ required: true }) odds!: number | null;
+  @Input({ required: true }) minDistance!: number | null;
   @Input({ required: true }) graphInfo: GraphInfo | null = null;
   @Input({ required: true }) loading!: boolean;
 
@@ -61,10 +63,13 @@ export class GraphFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if ('graphInfo' in changes) {
       this.form.reset({
-        sourceId: this.graphInfo?.sourceId.toString(),
-        targetId: this.graphInfo?.targetId.toString(),
+        sourceId: this.graphInfo?.sourceId,
+        targetId: this.graphInfo?.targetId,
         autonomy: this.graphInfo?.autonomy,
+        countdown: null,
       });
     }
   }
+
+  protected readonly Number = Number;
 }
