@@ -7,6 +7,7 @@ export interface GraphMetadataForm {
   targetId: number;
   autonomy: number | null;
   countdown: number | null;
+  empireInfo: string | null;
 }
 
 export interface GraphResponse {

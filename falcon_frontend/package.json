@@ -28,6 +28,7 @@
     "@swimlane/ngx-graph": "8.4.0",
     "d3": "^7.9.0",
     "d3-selection": "3.0.0",
+    "ngx-file-drop": "^16.0.0",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

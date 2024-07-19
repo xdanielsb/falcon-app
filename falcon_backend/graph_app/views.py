@@ -1,3 +1,5 @@
+import json
+
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import views
@@ -36,16 +38,28 @@ class FindPathView(views.APIView):
         target = get_object_or_404(Node, pk=request.data["targetId"])
         autonomy = request.data.get("autonomy", None)
         countdown = request.data.get("countdown", None)
-
-        empire = Empire.objects.first()
-        bounty_hunters_with_node_ids = []
-
-        for bounty in empire.bounty_hunters.all():
-            node = Node.objects.filter(name=bounty.planet).first()
-            if node:
-                bounty_hunters_with_node_ids.append(
-                    BountyHunterWithPlanetId(**{"day": bounty.day, "node_id": node.pk})
+        empire_info_str = request.data.get("empireInfo", None)
+        empire_info_dict = None
+        if empire_info_str:
+            try:
+                # Parse the JSON string into a Python dictionary
+                empire_info_dict = json.loads(empire_info_str)
+            except json.JSONDecodeError:
+                return JsonResponse(
+                    {"status": "error", "message": "Invalid JSON"}, status=400
                 )
+
+        bounty_hunters_with_node_ids = None
+        if empire_info_dict and empire_info_dict["bounty_hunters"]:
+            bounty_hunters_with_node_ids = []
+            for bounty in empire_info_dict["bounty_hunters"]:
+                node = Node.objects.filter(name=bounty["planet"]).first()
+                if node:
+                    bounty_hunters_with_node_ids.append(
+                        BountyHunterWithPlanetId(
+                            **{"day": bounty["day"], "node_id": node.pk}
+                        )
+                    )
 
         dis, path, stops, probability_arriving = find_best_path_heuristic(
             source.pk,

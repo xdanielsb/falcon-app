@@ -82,7 +82,12 @@ export class AppComponent {
         tap((res: GraphPath | null) => {
           if (this.graph && res) {
             this.odds = res.probability;
-            this.minDistance = Math.max(...Object.values(res.distances));
+            const values = Object.values(res.distances);
+            if (values.length) {
+              this.minDistance = Math.max(...values);
+            } else {
+              this.minDistance = null;
+            }
             const nodes: Node[] = (this.graph?.nodes || []).map((node) => {
               return {
                 ...node,
@@ -119,6 +124,7 @@ export class AppComponent {
         targetId: Number(input.targetId),
         autonomy: input.autonomy,
         countdown: input.countdown,
+        empireInfo: input.empireInfo,
       }),
     );
   }

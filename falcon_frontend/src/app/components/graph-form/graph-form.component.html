@@ -29,6 +29,27 @@
       <input matInput formControlName="countdown" />
     </mat-form-field>
   </form>
+
+  <section>
+    <h3>{{ 'GRAPH_MANAGEMENT.LOAD_EMPIRE_FILE' | translate }}</h3>
+    @if (file !== null) {
+      <div class="file-action">
+        <div class="file">
+          {{ 'GRAPH_MANAGEMENT.FILE_NAME' | translate: { name: file.name } }}
+        </div>
+        <button mat-mini-fab (click)="clearEmpireInfo()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    }
+    <app-upload-file *ngIf="!file">
+      <button mat-raised-button color="primary" (click)="browseFile()">
+        {{ 'GRAPH_MANAGEMENT.BROWSE_FILE' | translate }}
+      </button>
+      {{ 'GRAPH_MANAGEMENT.OR_DRAG_FILE' | translate }}
+      <app-file-input #inputComponent (selectFileEvent)="handleFile($event)" />
+    </app-upload-file>
+  </section>
 </section>
 
 <div class="actions">
@@ -52,7 +73,11 @@
 
 @if (minDistance !== null) {
   <div class="odds">
-    {{ 'GRAPH_MANAGEMENT.DISTANCE' | translate: { time: minDistance } }}
+    {{
+      'GRAPH_MANAGEMENT.DISTANCE'
+        | translate: { time: minDistance !== null ? minDistance : '-' }
+    }}
     <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
   </div>
+  <div class="subtitle">{{ 'GRAPH_MANAGEMENT.PATH_COLOR' | translate }}</div>
 }

@@ -42,6 +42,7 @@ export class GraphEffects {
             targetId: action.targetId,
             autonomy: action.autonomy,
             countdown: action.countdown,
+            empireInfo: action.empireInfo,
           })
           .pipe(
             map((graphPath: GraphPath) =>
