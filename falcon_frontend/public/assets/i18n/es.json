@@ -9,6 +9,7 @@
   "GRAPH_MANAGEMENT.DISTANCE": "Time to arrive: {{time}} time units",
   "GRAPH_MANAGEMENT.NUMBER_OF_NODES": "Número total de nodos",
   "GRAPH_MANAGEMENT.OPTIONS": "Options",
+  "GRAPH_MANAGEMENT.CANNOT_CONNECT": "Cannot connect to the server, please try again later.",
   "GRAPH_MANAGEMENT.CREATE_RANDOM_GRAPH": "Create random graph",
   "GRAPH_MANAGEMENT.NUMBER_OF_EDGES": "Número total de enlaces",
   "GRAPH_MANAGEMENT.NUMBER_OF_HUNTERS": "Número total de cazadores",

@@ -16,6 +16,7 @@
   "GRAPH_MANAGEMENT.INFO": "Graph Information",
   "GRAPH_MANAGEMENT.ADMINISTRATION": "Graph Administration",
   "GRAPH_MANAGEMENT.API": "API Access",
+  "GRAPH_MANAGEMENT.CANNOT_CONNECT": "Cannot connect to the server, please try again later.",
   "GRAPH_MANAGEMENT.LANGUAGE.ENGLISH": "English",
   "GRAPH_MANAGEMENT.LANGUAGE.FRENCH": "French",
   "GRAPH_MANAGEMENT.LANGUAGE.SPANISH": "Spanish",

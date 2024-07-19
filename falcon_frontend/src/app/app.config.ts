@@ -17,6 +17,7 @@ import { graphReducers } from './store/graph.reducers';
 import { GraphEffects } from './store/graph.effects';
 import { provideEffects } from '@ngrx/effects';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { provideToastr } from 'ngx-toastr';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,5 +64,6 @@ export const appConfig: ApplicationConfig = {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline', subscriptSizing: 'dynamic' },
     },
+    provideToastr(),
   ],
 };

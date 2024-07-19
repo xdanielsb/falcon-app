@@ -21,9 +21,9 @@ export class GraphEffects {
               edges: graph.edges,
             }),
           ),
-          catchError((error) =>
-            of(GraphActions.getGraphFailure({ error: error.message })),
-          ),
+          catchError((error) => {
+            return of(GraphActions.getGraphFailure({ error: error.message }));
+          }),
         );
       }),
       tap(() => {
@@ -49,9 +49,9 @@ export class GraphEffects {
                 graphPath: graphPath,
               }),
             ),
-            catchError((error) =>
-              of(GraphActions.getOddsFailure({ error: error.message })),
-            ),
+            catchError((error) => {
+              return of(GraphActions.getOddsFailure({ error: error.message }));
+            }),
           );
       }),
     ),
@@ -67,9 +67,11 @@ export class GraphEffects {
               graphInfo: graphInfo,
             }),
           ),
-          catchError((error) =>
-            of(GraphActions.getGraphInfoFailure({ error: error.message })),
-          ),
+          catchError((error) => {
+            return of(
+              GraphActions.getGraphInfoFailure({ error: error.message }),
+            );
+          }),
         );
       }),
     ),
@@ -86,10 +88,9 @@ export class GraphEffects {
               edges: graph.edges,
             }),
           ),
-          tap(() => {}),
-          catchError((error) =>
-            of(GraphActions.getGraphFailure({ error: error.message })),
-          ),
+          catchError((error) => {
+            return of(GraphActions.getGraphFailure({ error: error.message }));
+          }),
         );
       }),
       tap(() => {

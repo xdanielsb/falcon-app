@@ -10,4 +10,4 @@ COPY . .
 EXPOSE 4200
 RUN npm install -g serve
 ## Set the default command to serve the build output
-CMD ["serve", "-s", "dist/falcon_frontend/browser", "-l", "tcp://0.0.0.0:4200"]
+CMD ["serve", "-s", "dist/falcon_frontend/browser", "-l", "tcp://localhost:4200"]
