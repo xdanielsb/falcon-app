@@ -40,10 +40,8 @@ $ python manage.py runserver
 
 #### Running tests
 ```sh
-# unit tests algorithm
+# unit tests algorithm / rest api test
 $ pytest
-# rest api/utils/graph tests 
-$ python manage.py test
 ```
 
 

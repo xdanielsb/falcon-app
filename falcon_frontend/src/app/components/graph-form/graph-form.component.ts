@@ -50,7 +50,7 @@ export class GraphFormComponent implements OnChanges {
     sourceId: [null, Validators.required],
     targetId: [null, Validators.required],
     autonomy: [5, Validators.min(0)],
-    countdown: [null, Validators.min(0)],
+    countdown: [10, Validators.min(0)],
     empireInfo: [null],
   }) as unknown as AppForm<GraphMetadataForm>;
 
@@ -85,7 +85,7 @@ export class GraphFormComponent implements OnChanges {
         sourceId: this.graphInfo?.sourceId,
         targetId: this.graphInfo?.targetId,
         autonomy: this.graphInfo?.autonomy,
-        countdown: null,
+        countdown: this.graphInfo?.countDown,
       });
     }
   }

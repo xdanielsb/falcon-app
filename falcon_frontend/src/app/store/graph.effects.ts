@@ -8,6 +8,8 @@ import { Graph } from '../models/graph';
 import { Store } from '@ngrx/store';
 import { GraphPath } from '../models/graph-path';
 import { GraphInfo } from '../models/graph-info';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class GraphEffects {
   getGraph$ = createEffect(() =>
@@ -45,11 +47,18 @@ export class GraphEffects {
             empireInfo: action.empireInfo,
           })
           .pipe(
-            map((graphPath: GraphPath) =>
-              GraphActions.getOddsPathSuccess({
+            map((graphPath: GraphPath) => {
+              if (!graphPath.path || graphPath.path.length === 0) {
+                this.toastrService.error(
+                  this.trasnlateService.instant(
+                    'GRAPH_MANAGEMENT.NO_PATH_FOUND',
+                  ),
+                );
+              }
+              return GraphActions.getOddsPathSuccess({
                 graphPath: graphPath,
-              }),
-            ),
+              });
+            }),
             catchError((error) => {
               return of(GraphActions.getOddsFailure({ error: error.message }));
             }),
@@ -104,5 +113,7 @@ export class GraphEffects {
     private actions$: Actions,
     private store$: Store,
     private graphService: GraphService,
+    private toastrService: ToastrService,
+    private trasnlateService: TranslateService,
   ) {}
 }
