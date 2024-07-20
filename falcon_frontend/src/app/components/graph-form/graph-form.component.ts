@@ -85,7 +85,7 @@ export class GraphFormComponent implements OnChanges {
         sourceId: this.graphInfo?.sourceId,
         targetId: this.graphInfo?.targetId,
         autonomy: this.graphInfo?.autonomy,
-        countdown: null,
+        countdown: this.graphInfo?.countDown,
       });
     }
   }

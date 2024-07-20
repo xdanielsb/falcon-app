@@ -17,7 +17,8 @@
   "GRAPH_MANAGEMENT.ADMINISTRATION": "Graph Administration",
   "GRAPH_MANAGEMENT.API": "API Access",
   "GRAPH_MANAGEMENT.CANNOT_CONNECT": "Cannot connect to the server, please try again later.",
-  "GRAPH_MANAGEMENT.LOAD_EMPIRE_FILE": "Load Empire File",
+  "GRAPH_MANAGEMENT.LOAD_EMPIRE_FILE": "Load thieves file",
+  "GRAPH_MANAGEMENT.NO_PATH_FOUND": "Could not arrive to destination, please try changing the parameters.",
   "GRAPH_MANAGEMENT.BROWSE_FILE": "Browse file",
   "GRAPH_MANAGEMENT.ERROR_READING_FILE": "Error reading file",
   "GRAPH_MANAGEMENT.SUCCESS_READING_FILE": "Success reading file",
@@ -30,5 +31,5 @@
   "GRAPH_MANAGEMENT.KIBANA_LOGS": "Falcon Application Logs",
   "GRAPH_MANAGEMENT.METRIC_BEAT_LOGS": "Falcon Metric Logs",
   "GRAPH_MANAGEMENT.KIBANA_LOGS.TOOLTIP": "To use this option, start the application with monitoring enabled. More information is available in the main README.md file.",
-  "GRAPH_MANAGEMENT.METRIC_LOGS.TOOLTIP": "To use this option, start the application with monitoring enabled. More information is available in the main README.md file."
+  "GRAPH_MANAGEMENT.METRIC_LOGS.TOOLTIP": "To use this option, start the application with monitoring enabled. More information is available in the main README.md file.",
 }
