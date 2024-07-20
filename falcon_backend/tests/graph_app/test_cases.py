@@ -1,5 +1,6 @@
 from unittest import TestCase
 
+import pytest
 from django.test import override_settings
 
 from graph_app.management.commands.give_me_the_odds import compute_odds
@@ -8,6 +9,7 @@ from graph_app.utils.file import read_json_file
 
 class TestCases(TestCase):
     @override_settings(DEBUG=True)
+    @pytest.mark.django_db
     def test_case(self):
         for case in range(1, 5):
             with self.subTest(case=case):
