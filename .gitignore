@@ -1,6 +1,6 @@
 .idea/
 .pyc
-.swp
+*.swp
 .sw
 
 __pycache__/

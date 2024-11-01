@@ -31,5 +31,5 @@
   "GRAPH_MANAGEMENT.KIBANA_LOGS": "Falcon Application Logs",
   "GRAPH_MANAGEMENT.METRIC_BEAT_LOGS": "Falcon Metric Logs",
   "GRAPH_MANAGEMENT.KIBANA_LOGS.TOOLTIP": "To use this option, start the application with monitoring enabled. More information is available in the main README.md file.",
-  "GRAPH_MANAGEMENT.METRIC_LOGS.TOOLTIP": "To use this option, start the application with monitoring enabled. More information is available in the main README.md file.",
+  "GRAPH_MANAGEMENT.METRIC_LOGS.TOOLTIP": "To use this option, start the application with monitoring enabled. More information is available in the main README.md file."
 }
